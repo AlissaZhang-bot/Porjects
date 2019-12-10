@@ -1,0 +1,1004 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+       <title>AirNSW - Details</title>
+        {% include 'head.html' %}
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+    </head>
+    <body>
+        <!--loader-->
+        <div class="loader-wrap">
+            <div class="pin">
+                <div class="pulse"></div>
+            </div>
+        </div>
+        <!--loader end-->
+        <!-- Main  -->
+        <div id="main">
+            <!-- header-->
+            <header class="main-header">
+               {% include 'header.html' %}
+            </header>
+            <!--  header end -->
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!--  section  -->
+                    <section class="list-single-hero" data-scrollax-parent="true" id="sec1">
+                        <div class="bg par-elem "  data-bg="{{ img1 }}" data-scrollax="properties: { translateY: '30%' }"></div>
+                        <div class="list-single-hero-title fl-wrap">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="listing-rating-wrap">
+                                            <div class="listing-rating card-popup-rainingvis" data-starrating2="{{ accommodation.star_rating }}"></div>
+                                        </div>
+                                        <h2><span>{{ accommodation.title }}</span></h2>
+                                        <div class="list-single-header-contacts fl-wrap">
+                                            <ul>
+                                                <li><i class="far fa-phone"></i><a  href="#">+7(111)123456789</a></li>
+                                                <li><i class="far fa-map-marker-alt"></i><a id="accommodation_add">{{ accommodation.physical_address }}</a></li>
+                                                <li><i class="far fa-envelope"></i><a  href="#">{{ accommodation.owner_id.email }}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <!--  list-single-hero-details-->
+                                        <div class="list-single-hero-details fl-wrap">
+                                            <!--  list-single-hero-rating-->
+                                            <div class="list-single-hero-rating">
+                                                <div class="rate-class-name">
+                                                    <div class="score"><strong> </strong>{{ reviews_count }} Reviews </div>
+                                                    <span>{{ accommodation.star_rating }}</span>                                             
+                                                </div>
+                                                <!-- list-single-hero-rating-list-->
+                                                
+                                                <!-- list-single-hero-rating-list end-->
+                                            </div>
+                                            <!--  list-single-hero-rating  end-->
+                                            <div class="clearfix"></div>
+                                            <!-- list-single-hero-links-->
+                                            <div class="list-single-hero-links">
+                                                {% if accommodation.owner_id.username != username %}
+                                                <a class="lisd-link" href="#sec10"><i class="fal fa-bookmark"></i> Book Now</a>
+                                                {% endif %}
+                                                {% if guest_or_not %}
+                                                <a class="custom-scroll-link lisd-link" href="#sec6"><i class="fal fa-comment-alt-check"></i> Add review</a>
+                                                {% endif %}
+                                            </div>
+                                            <!--  list-single-hero-links end-->                                            
+                                        </div>
+                                        <!--  list-single-hero-details  end-->
+                                    </div>
+                                </div>
+                                <div class="breadcrumbs-hero-buttom fl-wrap">
+                                    <div class="list-single-hero-price">AWG/NIGHT<span id="price_tag">$ {{ accommodation.price }}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--  section  end-->
+                    <!--  section  -->
+                    <section class="grey-blue-bg small-padding scroll-nav-container" id="sec2">
+                        <!--  scroll-nav-wrapper  -->
+                        <div class="scroll-nav-wrapper fl-wrap">
+                            <div class="hidden-map-container fl-wrap">
+                                <input id="pac-input" class="controls fl-wrap controls-mapwn" type="text" placeholder="What Nearby ?   Bar , Gym , Restaurant ">
+                                <div class="map-container">
+                                    <div id="singleMap" data-latitude="{{ lat }}" data-longitude="{{ lng }}"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="container">
+                                <nav class="scroll-nav scroll-init">
+                                    <ul>
+                                        <li><a class="act-scrlink" href="#sec1">Top</a></li>
+                                        <li><a href="#sec3">Amenities</a></li>
+                                        <li><a href="#sec5">Reviews</a></li>
+                                    </ul>
+                                </nav>
+                                <a href="#" class="show-hidden-map">  <span>On The Map</span> <i class="fal fa-map-marked-alt"></i></a>
+                            </div>
+                        </div>
+                        <!--  scroll-nav-wrapper end  -->                    
+                        <!--   container  -->
+                        <div class="container">
+                            <!--   row  -->
+                            <div class="row">
+                                <!--   datails -->
+                                <div class="col-md-8">
+                                    <div class="list-single-main-container ">
+                                        <!-- fixed-scroll-column  -->
+                                        <div class="fixed-scroll-column">
+                                            <div class="fixed-scroll-column-item fl-wrap">
+                                                <div class="showshare sfcs fc-button"><i class="far fa-share-alt"></i><span>Share </span></div>
+                                                <div class="share-holder fixed-scroll-column-share-container">
+                                                    <div class="share-container  isShare"></div>
+                                                </div>
+                                                {% if guest_or_not %}
+                                                <a class="fc-button custom-scroll-link" href="#sec6"><i class="far fa-comment-alt-check"></i> <span>  Add review </span></a>
+                                                {% endif %}
+                                                <!-- <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Save</span></a> -->
+                                                {% if accommodation.owner_id.username != username %}
+                                                <a class="fc-button" href="#sec10"><i class="far fa-bookmark"></i> <span> Book Now </span></a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <!-- fixed-scroll-column end   -->
+                                        <div class="list-single-main-media fl-wrap">
+                                            <!-- gallery-items   -->
+                                            <div class="gallery-items grid-small-pad  list-single-gallery three-coulms lightgallery">
+                                                <!-- 1 -->
+                                                <div class="gallery-item ">
+                                                    <div class="grid-item-holder">
+                                                        <div class="box-item">
+                                                            <img  src="{{ img1 }}"   alt="">
+                                                            <a href="{{ img1 }}" class="gal-link popup-image"><i class="fa fa-search"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 1 end -->
+                                                <!-- 2 -->
+                                                <div class="gallery-item">
+                                                    <div class="grid-item-holder">
+                                                        <div class="box-item">
+                                                            <img  src="{{ img2 }}"   alt="">
+                                                            <a href="{{ img2 }}" class="gal-link popup-image"><i class="fa fa-search"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 2 end -->
+                                                <!-- 7 -->
+                                                <div class="gallery-item">
+                                                    <div class="grid-item-holder">
+                                                        <div class="box-item">
+                                                            <img  src="{{ img3 }}"   alt="">
+                                                            <div class="more-photos-button dynamic-gal"  data-dynamicPath="[{'src': '{{ img3 }}'} {% for img_url in rest_imgs %}, {'src': '{{ img_url }}'} {% endfor %}]">Other <span>{{ img_num }} photos</span><i class="far fa-long-arrow-right"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 7 end -->
+                                            </div>
+                                            <!-- end gallery items -->                                          
+                                        </div>
+                                        <!-- list-single-header end -->
+                                        <div class="list-single-facts fl-wrap">
+                                            <!-- inline-facts -->
+                                            <div class="inline-facts-wrap">
+                                                <div class="inline-facts">
+                                                    <i class="fal fa-bed"></i>
+                                                    <div class="milestone-counter">
+                                                        <div class="stats animaper">
+                                                            {{ accommodation.beds_num }}
+                                                        </div>
+                                                    </div>
+                                                    <h6>Beds</h6>
+                                                </div>
+                                            </div>
+                                            <!-- inline-facts end -->
+                                            <!-- inline-facts  -->
+                                            <div class="inline-facts-wrap">
+                                                <div class="inline-facts">
+                                                    <i class="fal fa-door-open"></i>
+                                                    <div class="milestone-counter">
+                                                        <div class="stats animaper">
+                                                            {{ accommodation.bedrooms_num }}
+                                                        </div>
+                                                    </div>
+                                                    <h6>Bed rooms</h6>
+                                                </div>
+                                            </div>
+                                            <!-- inline-facts end -->
+                                            <!-- inline-facts -->
+                                            <div class="inline-facts-wrap">
+                                                <div class="inline-facts">
+                                                    <i class="fal fa-bath"></i>
+                                                    <div class="milestone-counter">
+                                                        <div class="stats animaper">
+                                                            {{ accommodation.bathrooms_num }}
+                                                        </div>
+                                                    </div>
+                                                    <h6>Bathrooms</h6>
+                                                </div>
+                                            </div>
+                                            <!-- inline-facts end -->
+                                            <!-- inline-facts -->
+                                            <div class="inline-facts-wrap">
+                                                <div class="inline-facts">
+                                                    <i class="fal fa-users"></i>
+                                                    <div class="milestone-counter">
+                                                        <div class="stats animaper">
+                                                            {{ accommodation.guests_num }}
+                                                        </div>
+                                                    </div>
+                                                    <h6>Max guests number</h6>
+                                                </div>
+                                            </div>
+                                            <!-- inline-facts end -->                                                                        
+                                        </div>
+                                        <!--   list-single-main-item -->
+                                        <div class="list-single-main-item fl-wrap">
+                                            <div class="list-single-main-item-title fl-wrap">
+                                                <h3>About this place </h3>
+                                            </div>
+                                            <p>{{ accommodation.description }}</p>
+                                        </div>
+                                        <!--   list-single-main-item end -->
+                                        <!--   list-single-main-item -->
+                                        <div class="list-single-main-item fl-wrap" id="sec3">
+                                            <div class="list-single-main-item-title fl-wrap">
+                                                <h3>Amenities</h3>
+                                            </div>
+                                            <div class="listing-features fl-wrap">
+                                                <ul>
+                                                    {% if amenity.essentials != 'False' %}
+                                                        <li><i class="fal fa-rocket"></i>Essentials</li>
+                                                    {% endif %}
+                                                    {% if amenity.air_conditioning %}
+                                                        <li><i class="fal fa-snowflake"></i> Air Conditioned</li>
+                                                    {% endif %}
+                                                    {% if amenity.heat %}
+                                                        <li><i class="fal fa-fire-alt"></i> Heat</li>
+                                                    {% endif %}
+                                                    {% if amenity.hair_dryer %}
+                                                        <li><i class="fal fa-wind"></i> Hair Dryer</li>
+                                                    {% endif %}
+                                                    {% if amenity.closet %}
+                                                        <li><i class="fal fa-store"></i> Closet</li>
+                                                    {% endif %}
+                                                    {% if amenity.iron %}
+                                                        <li><i class="fal fa-paw"></i> Iron</li>
+                                                    {% endif %}
+                                                    {% if amenity.tv %}
+                                                        <li><i class="fal fa-tv"></i> TV</li>
+                                                    {% endif %}
+                                                    {% if amenity.fireplace %}
+                                                        <li><i class="fal fa-fireplace"></i> Fireplace</li>
+                                                    {% endif %}
+                                                    {% if amenity.private_entrance %}
+                                                        <li><i class="fal fa-tractor"></i> Private Entrance</li>
+                                                    {% endif %}
+                                                    {% if amenity.shampoo %}
+                                                        <li><i class="fal fa-tv"></i> Shampoo</li>
+                                                    {% endif %}
+                                                    {% if amenity.wifi %}
+                                                        <li><i class="fal fa-wifi"></i> Free Wi Fi</li>
+                                                    {% endif %}
+                                                    {% if amenity.workspace %}
+                                                        <li><i class="fal fa-book-alt"></i> Workspace</li>
+                                                    {% endif %}
+                                                    {% if amenity.breakfast %}
+                                                        <li><i class="fal fa-egg-fried"></i> Breakfast</li>
+                                                    {% endif %}
+                                                    {% if share_space.kitchen %}
+                                                        <li><i class="fal fa-utensils"></i> Kitchen</li>
+                                                    {% endif %}
+                                                    {% if share_space.washing_machine %}
+                                                        <li><i class="fal fa-cabinet-filing"></i> Washing Machine</li>
+                                                    {% endif %}
+                                                    {% if share_space.dryer %}
+                                                        <li><i class="fal fa-wind-warning"></i> Dryer</li>
+                                                    {% endif %}
+                                                    {% if share_space.parking %}
+                                                        <li><i class="fal fa-parking"></i> Parking</li>
+                                                    {% endif %}
+                                                    {% if share_space.gym %}
+                                                        <li><i class="fal fa-dumbbell"></i> Gym</li>
+                                                    {% endif %}
+                                                    {% if share_space.pool %}
+                                                        <li><i class="fal fa-swimming-pool"></i> Pool</li>
+                                                    {% endif %}
+                                                    {% if share_space.hot_tub %}
+                                                        <li><i class="fal fa-shower"></i> Hot Tub</li>
+                                                    {% endif %}
+                                                    {% if share_space.lift %}
+                                                        <li><i class="fal fa-rocket"></i> Lift</li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                            <span class="fw-separator"></span>
+                                            
+                                        </div>
+                                        <!--   list-single-main-item end -->  
+                                        <!-- list-single-main-item -->   
+                                        <div class="list-single-main-item fl-wrap" id="sec5">
+                                            <div class="list-single-main-item-title fl-wrap">
+                                                <h3>Item Reviews </h3>
+                                            </div>
+                                            <!--reviews-score-wrap-->   
+                                            <div class="reviews-score-wrap fl-wrap">
+                                                <div class="review-score-total">
+                                                    <span>
+                                                    {{ accommodation.star_rating }}
+                                                    <!-- <strong>Very Good</strong> -->
+                                                    </span>
+                                                    {% if guest_or_not %}
+                                                    <a href="#sec6" class="color2-bg">Add Review</a>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="review-score-detail">
+                                                    <!-- review-score-detail-list-->
+                                                    <div class="review-score-detail-list">
+                                                        
+                                                    </div>
+                                                    <!-- review-score-detail-list end-->
+                                                </div>
+                                            </div>
+                                            <!-- reviews-score-wrap end -->   
+                                            <span id="store_acc_id" style="display: none;">{{accommodation.id}}</span>
+                                            <div class="reviews-comments-wrap">
+                                                <!-- reviews-comments-item -->
+                                                {% for review in reviews %}  
+                                                <div class="reviews-comments-item">
+                                                    <div class="review-comments-avatar">
+                                                        <img src="../static/images/avatar/1.jpg" alt=""> 
+                                                    </div>
+                                                    <div class="reviews-comments-item-text">
+                                                        <h4><a href="../user_profile?account_username={{review.reviewer_id.username}}">{{ review.reviewer_id.name }}</a></h4>
+                                                        <div class="clearfix"></div>
+                                                        <p>{{ review.comments }}</p>
+                                                        {% for item in rw_albums %}
+                                                                {% ifequal item.review_id review.id %}
+
+                                                                    <a><img src="{{item.url}}" style="width: 260px; margin-right: 20px; padding: 10px;"></a >
+                                                                {% endifequal %}
+                                                        {% endfor %}
+                                                        
+                                                        <div id="all_reviews" class="reviews-comments-item-date">
+                                                            <span><i class="far fa-calendar-check"></i>{{ review.date }}</span>
+                                                            <a id="show-comment_{{review.id}}"><i class="fal fa-comments"></i> Show</a>
+                                                            <a id="show-reply_{{review.id}}" style="margin-right: 10px;"><i class="fal fa-reply"></i> Reply</a>
+                                                        </div>
+                                                        <div id="all_replies">
+                                                        <form role="form" id="show-reply_{{review.id}}_box" style="display: none;">
+                                                            <div class="form-group">
+                                                                <label for="name">Reply to {{ review.reviewer_id.name }}</label>
+                                                                <textarea class="form-control" rows="3" name="{{review.id}}_textarea" value=""></textarea>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Post</button>
+                                                        </form></div>
+
+                                                        <div id="all-single-replies">
+                                                            {% for comm in rw_comments %}
+                                                                {% ifequal comm.review_id.id review.id %}
+                                                                <form role="form" id="show-single-reply_{{comm.id}}_box" style="display: none;">
+                                                                    <div class="form-group">
+                                                                        <label for="name">Comment to {{comm.username.name}}</label>
+                                                                        <textarea class="form-control" rows="3" name="{{comm.id}}_inner_textarea" value=""></textarea>
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-primary">Post</button>
+                                                                </form>
+                                                                {% endifequal %}
+                                                            {% endfor %}
+                                                        </div>
+                                                        <div id="show-comment_{{review.id}}_box" style="display: none;">
+                                                            {% for comm in rw_comments %}
+                                                                {% ifequal comm.review_id.id review.id %}
+                                                                    <p style="padding-bottom:0px; margin: 0px;"><a href="../user_profile?account_username={{request.session.username}}">{{comm.username.name}}</a> @ <a href="../user_profile?account_username={{comm.reply_to.username}}">{{ comm.reply_to.name }}</a>     {{comm.comment_time}}     <a id="show-single-reply_{{comm.id}}"><i class="fal fa-reply"></i> reply</a></p>
+                                                                    <p style="padding-bottom:0px;"><comm class="content">{{comm.content}}</comm></p>
+                                                                {% endifequal %}
+                                                            {% endfor %}    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                <!--reviews-comments-item end-->                                                                 
+                                            </div>
+                                        </div>
+                                        <!-- list-single-main-item end -->   
+                                        <!-- list-single-main-item -->   
+                                        <span id="store_rw_id" style="display: none;">{{review_id}}</span>
+                                        {% if guest_or_not %}
+                                        <div class="list-single-main-item fl-wrap" id="sec6">
+                                        {% else %}
+                                        <div class="list-single-main-item fl-wrap" id="sec6" style='display: none;'>
+                                        {% endif %}
+                                            <div class="list-single-main-item-title fl-wrap">
+                                                <h3>Add Review</h3>
+                                            </div>
+                                            <!-- Add Review Box -->
+                                            <div id="add-review" class="add-review-box">
+                                                <!-- Review Comment -->
+                                                <form id="add-comment" class="add-comment  custom-form" name="rangeCalc" >
+                                                    <!-- <fieldset> -->
+                                                        <div class="review-score-form fl-wrap">
+                                                            <div class="review-range-container">
+                                                                <!-- review-range-item-->
+                                                                <div class="review-range-item">
+                                                                    <div class="range-slider-title">Cleanliness</div>
+                                                                    <div class="range-slider-wrap ">
+                                                                        <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="5">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- review-range-item end --> 
+                                                                <!-- review-range-item-->
+                                                                <div class="review-range-item">
+                                                                    <div class="range-slider-title">Comfort</div>
+                                                                    <div class="range-slider-wrap ">
+                                                                        <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1"  value="4">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- review-range-item end --> 
+                                                                <!-- review-range-item-->
+                                                                <div class="review-range-item">
+                                                                    <div class="range-slider-title">Stuff</div>
+                                                                    <div class="range-slider-wrap ">
+                                                                        <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="5" >
+                                                                    </div>
+                                                                </div>
+                                                                <!-- review-range-item end --> 
+                                                                <!-- review-range-item-->
+                                                                <div class="review-range-item">
+                                                                    <div class="range-slider-title">Facilities</div>
+                                                                    <div class="range-slider-wrap">
+                                                                        <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="4">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- review-range-item end -->                                     
+                                                            </div>
+                                                            <div class="review-total">
+                                                                <span><input id="review_score" type="text" name="rg_total"  data-form="AVG({rgcl})" value="0"></span>    
+                                                                <strong>Your Score</strong>
+                                                            </div>
+                                                        </div>
+                                                        <!-- profile-edit-container--> 
+                                                        <div class="profile-edit-container">
+                                                            <div class="custom-form">
+                                                                <div class="row">
+                                                                    <!--col --> 
+                                                                    <div class="col-md-4" style="width: 100%;">
+                                                                        <div class="add-list-media-wrap">
+                                                                            <div class="add-list-media-wrap" id="add-photo-div">
+                                                                                
+                                                                                    <div class="fu-text" id = "show_img1">
+                                                                                        <span><i class="fal fa-image"></i> Click here or drop files to upload</span>
+                                                                                        <input id="img_upload" name="img" type="file" class="upload-img" style="margin-left:39%;"> 
+                                                                                        {% for item in albums %}
+                                                                                        <!-- < img src="{{item.url}}" name="show_img" id = "show_img"/> -->
+                                                                                        <div class="geodir-category-img" style="width: 260px; margin-right: 20px; padding: 10px;" id="img_{{item.id}}" name="show_img_div">
+                                                                                            <a><img src="{{item.url}}" id="a_{{item.id}}" name="show_img"></a>
+                                                                                            <a class="ed-btn" style="color: rgb(60, 115, 218);" id="{{item.id}}" >Delete</a>         
+                                                                                            <!--  -->   
+                                                                                        </div>
+                                                                                        {% endfor %}
+                                                                                    </div>
+                                                                                <div id="app_form">
+                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--col end--> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <textarea id="review_text" cols="40" rows="3" placeholder="Your Review:"></textarea>
+                                                    <!-- </fieldset> -->
+                                                    <button id="add_review_button" type="button" class="btn  big-btn flat-btn float-btn color2-bg" style="margin-top:30px">Submit Review </button>
+                                                </form>
+                                            </div>
+                                            <!-- Add Review Box / End -->
+                                        </div>
+                                        <!-- list-single-main-item end -->                                    
+                                    </div>
+                                </div>
+                                <!--   datails end  -->
+                                <!--   sidebar  -->
+                                <div  id="sec10" class="col-md-4">
+                                    <!--box-widget-wrap -->  
+                                    <div class="box-widget-wrap">
+                                        <!--box-widget-item -->
+                                        {% if accommodation.owner_id.username != username %}
+                                        <div class="box-widget-item fl-wrap">
+                                            <div class="box-widget">
+                                                <div class="box-widget-content">
+                                                    <div class="box-widget-item-header">
+                                                        <h3> Book This Hotel</h3>
+                                                    </div>
+                                                    <form name="bookFormCalc" action="{% url 'reservation' accommodation.id %}" method="post" class="book-form custom-form">
+                                                        <fieldset>
+                                                            <div class="cal-item">
+                                                                <div class="bookdate-container  fl-wrap">
+                                                                    <label><i class="fal fa-calendar-check"></i> When </label>
+                                                                    <input type="text"    placeholder="Date In-Out" name="bookdates"   value="" id="reservation_date" />
+                                                                    <input type="text" id="occupied_ranges" name="item_total" class="hid-input" value="{{ occupied_ranges }}">
+                                                                    <div class="bookdate-container-dayscounter"><i class="far fa-question-circle"></i><span>Days : <strong>0</strong></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="cal-item">
+                                                                <div class="quantity-item fl-wrap">
+                                                                    <label> Guests</label>
+                                                                    <div class="quantity">
+                                                                        <input type="number" name="qty3" min="1" max="{{ accommodation.guests_num }}" step="1" value="1">
+                                                                        <input type="text" name="item_total" class="hid-input" value="" data-form="{qty3} * {repopt} - {repopt}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <input type="number"  id="totaldays" name="qty5" class="hid-input">
+                                                        <input type="number"  id="price" name="price" class="hid-input" value="{{ accommodation.price }}">
+                                                        <div class="total-coast fl-wrap"><strong>Total Cost</strong> <span>$ <input type="text" name="grand_total" value="" data-form="SUM({price}) * {qty5}"></span></div>
+                                                        <button type='submit' class="btnaplly color2-bg" id="book_now" onclick="return check_submit()">Book Now<i class="fal fa-paper-plane"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        <!--box-widget-item end -->                                      
+                                        <!--box-widget-item -->
+                                        <div class="box-widget-item fl-wrap">
+											<div id="weather-widget" class="gradient-bg ideaboxWeather" data-city={{weather_suburb}}></div>
+                                        </div>
+                                        
+                                        <div class="box-widget-item fl-wrap">
+                                            <div class="box-widget">
+                                                <div class="box-widget-content">
+                                                    <div class="box-widget-item-header">
+                                                        <h3>Hosted By</h3>
+                                                    </div>
+                                                    <div class="box-widget-author fl-wrap">
+                                                        <div class="box-widget-author-title fl-wrap">
+                                                            <div class="box-widget-author-title-img">
+                                                                {% if accommodation.owner_id.portrait_address %}
+                                                                    <img src="{{accommodation.owner_id.portrait_address}}" alt=""> 
+                                                                {% else %}
+                                                                    <img src="../static/images/avatar/1.jpg" alt=""> 
+                                                                {% endif %}
+                                                            </div>
+                                                            <a href="../user_profile?account_username={{accommodation.owner_id.username}}">{{ accommodation.owner_id.name }}</a>
+                                                            <span>{{ owner_listing_num }} Places Hosted</span>
+                                                        </div>
+                                                        <a href="../user_profile?account_username={{accommodation.owner_id.username}}" class="btn flat-btn color-bg   float-btn">View Profile</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--box-widget-item end -->                              
+                                        <!--box-widget-item -->
+                                        <!--box-widget-item end -->                            
+                                    </div>
+                                    <!--box-widget-wrap end -->  
+                                </div>
+                                <!--   sidebar end  -->
+                            </div>
+                            <!--   row end  -->
+                        </div>
+                        <!--   container  end  -->
+                    </section>
+                    <!--  section  end-->
+                </div>
+                <!-- content end-->
+                <div class="limit-box fl-wrap"></div>
+            </div>
+            <!--wrapper end -->
+            <!--footer -->
+            <footer class="main-footer">
+                {% include 'footer.html' %}
+            </footer>
+            <!--footer end -->          
+            <!--register form -->
+            {% include 'login-signup-logout-tags.html' %}
+            <!--register form end -->
+            <a class="to-top"><i class="fas fa-caret-up"></i></a>
+        </div>
+        <!-- Main end -->
+        <!--=============== scripts  ===============-->
+        <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/js/plugins.js"></script>
+        <script type="text/javascript" src="../static/js/scripts_new.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7eqcPUwBmkn80owGULmLmMVEZFr-iv4&libraries=places&callback=initAutocomplete"></script> 
+
+        <script type="text/javascript" src="../static/js/map-single_new.js"></script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--=============== our scripts  ===============-->
+        <script type="text/javascript">
+            // Login
+            $(document).on('submit', '#loginForm', function(){
+                var username =  $("#uName").val(); 
+                var password =  $("#uPass").val();
+                $.post(
+                    '{% url 'login' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password
+                    },  
+                    // callback
+                    function(json){
+                        //sessionStorage.setItem('username', username);
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#login-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // Signup
+            $(document).on('submit', '#signupForm', function(){
+                var username =  $("#signup_uName").val(); // 获取输入框的值
+                var password =  $("#signup_uPass").val();
+                var password2 =  $("#signup_uPass2").val();
+                $.post(
+                    '{% url 'signup' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password,
+                        "password2": password2
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#signup-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // logout
+            $(document).on('click', '#logout-link', function(){
+                $.get(
+                    '{% url 'logout' %}',  
+                    // data
+                    {},  
+                    // callback
+                    function(json){
+                        $("#signin-icon").show();
+                        $("#posting-icon").hide();
+                        $("#request-icon").hide();
+                        $("#header_show_img").hide();
+                        $("#welcome").removeClass().addClass("header-user-name");
+                        $("#welcome-list").removeClass();
+                        $("a#user_protrait").text("My Account");
+                        $("a#user_protrait").attr("href", "");
+                    },
+                )
+            });
+            // count the total days
+            $('#totaldays').change(function(){
+                //console.log($(this).val());
+                if($(this).val() == "0"){
+                    $(this).val(0);
+                } else{
+                    var totalday = $(this).val();
+                    $(this).val(totalday);
+                }
+            });
+            // get address of the place by latitude and longtitude from google map
+            
+            function geocodePosition(pos){
+                var geocoder;
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({
+                    latLng: pos
+                }, function(responses){
+                    if (responses && responses.length > 0) {
+                        $('#accommodation_add').text(responses[0].formatted_address);
+                        /* return responses[0].formatted_address; */
+                    } else {
+                        $('#accommodation_add').text(''); 
+                        /* return ""; */
+                    }
+                });
+            }
+            $(window).load(
+                function(){
+                    var lng = $('#singleMap').data('longitude');
+                    var lat = $('#singleMap').data('latitude');
+                    var address = $('#accommodation_add').text();
+                    if (lng != "" && lat != "" && address == ""){
+                        lng = parseFloat(lng);
+                        lat = parseFloat(lat);
+                        geocodePosition(new google.maps.LatLng(lat, lng));
+                    }
+                }
+            );
+            
+            // check input before make a reservation
+            function check_submit(){
+                var check_in_and_out = $('input[name="bookdates"]').val();
+                var username = $("a#user_protrait").text();
+                if(username == 'My Account'){
+                    alert("Please Login first.");
+                    return false;
+                } else {
+                    if(check_in_and_out == ''){
+                        alert("Please select the date!");
+                        return false
+                    }
+                    return true;
+                }
+            }
+            // show reply box
+            var review_list = new Array();
+            $(function(){
+                $("div#all_reviews").find("[id]").each(function(){  
+                    var id = $(this).attr("id");  
+                    review_list.push(id);
+                })
+                review_list.forEach((item,index,array)=>{
+                    $(document).on('click', '#'+item, function(){
+                        var box_name = item+'_box';
+                        console.log(box_name);
+                        $('#'+box_name).toggle();
+                        var single_review_list = new Array();
+                        $("div#"+box_name).find("[id]").each(function(){  
+                            var single_id = $(this).attr("id");  
+                            single_review_list.push(single_id);
+                        })
+                        single_review_list.forEach((item1,index1,array1)=>{
+                            $(document).on('click', '#'+item1, function(){
+                                var single_box_name = item1+'_box';
+                                console.log("single reply",single_box_name);
+                                $('#'+single_box_name).toggle();
+                            });
+                        });
+                    });
+                })
+            });
+            
+            // post reply content
+            var review_list = new Array();
+            $(function(){
+                $("div#all_replies").find("[id]").each(function(){  
+                    var id = $(this).attr("id");  
+                    review_list.push(id);
+                })
+                review_list.forEach((item,index,array)=>{
+                    $(document).on('submit', '#'+item, function(){
+                        var review_id = item.split("_")[1];
+                        var textarea_value = review_id + "_textarea";
+                        console.log(review_id);
+                        console.log(textarea_value);
+                        var reply = $('[name ='+textarea_value+']').val();
+                        console.log(reply);
+                        if(reply.replace(/\s/g, "").length ==0){
+                            alert("Content cannot be empty.");
+                            return false;
+                        } else {
+                            $('#'+item).toggle();
+                            //alert(review_id, reply);
+                            $.post(
+                                '{% url 'reply_to_review' %}',  
+                                // data
+                                {
+                                    "review_id": review_id,
+                                    "textarea_value": reply
+                                }, 
+                                // callback
+                                function(json){
+                                    var status = json['status']; 
+                                    if(status == '200'){
+                                        var new_rw_id = json['new_rw_id'];
+                                        var new_rw_rp_id = json['new_rw_rp_id'];
+                                        var new_rw_rp_name = json['new_rw_rp_name'];
+                                        var new_rw_user = json['new_rw_user'];
+                                        var new_cm_time = json['new_cm_time'];
+                                        var rq_review_id = json['rq_review_id'];
+                                        new_cm_time = new_cm_time.split('.')[0];
+                                        new_cm_time = new_cm_time.replace("T", " ");
+                                        var parent = $('#show-comment_'+rq_review_id+'_box');
+                                        parent.prepend('<p style="padding-bottom:0px;"><comm class="content">'+reply+'</comm></p>')
+                                        parent.prepend('<p style="padding-bottom:0px; margin: 0px;"><a href="../user_profile?account_username={{request.session.username}}">'+new_rw_user+'</a> @ <a href="../user_profile?account_username='+new_rw_rp_id+'">'+new_rw_rp_name+'</a>     '+new_cm_time+'</p>')
+                                    } else {
+                                        alert("Please Login first.");
+                                        $('#regist-box').show();
+                                    }
+                                }
+                            )
+                            return false;
+                        }
+                    });
+                })
+            });
+            // post single reply
+            var single_reply_list = new Array();
+            $(function(){
+                $("div#all-single-replies").find("[id]").each(function(){  
+                    var id = $(this).attr("id");  
+                    single_reply_list.push(id);
+                })
+                single_reply_list.forEach((item,index,array)=>{
+                    $(document).on('submit', '#'+item, function(){
+                        var comment_id = item.split("_")[1];
+                        var textarea_value = comment_id + "_inner_textarea";
+                        console.log(comment_id);
+                        console.log(textarea_value);
+                        var reply = $('[name ='+textarea_value+']').val();
+                        console.log(reply);
+                        if(reply.replace(/\s/g, "").length ==0){
+                            alert("Content cannot be empty.");
+                        } else {
+                            $('#'+item).toggle();
+                            $.post(
+                                '{% url 'reply_to_reply' %}',  
+                                // data
+                                {
+                                    "comment_id": comment_id,
+                                    "textarea_value": reply
+                                }, 
+                                // callback
+                                function(json){
+                                    var status = json['status']; 
+                                    if(status == '200'){
+                                        var new_rw_id = json['new_rw_id'];
+                                        var new_rw_rp_id = json['new_rw_rp_id'];
+                                        var new_rw_rp_name = json['new_rw_rp_name'];
+                                        var new_rw_user = json['new_rw_user'];
+                                        var new_cm_time = json['new_cm_time'];
+                                        var rq_review_id = json['rq_review_id'];
+                                        new_cm_time = new_cm_time.split('.')[0];
+                                        new_cm_time = new_cm_time.replace("T", " ");
+                                        var parent = $('#show-comment_'+rq_review_id+'_box');
+                                        parent.prepend('<p style="padding-bottom:0px;"><comm class="content">'+reply+'</comm></p>')
+                                        parent.prepend('<p style="padding-bottom:0px; margin: 0px;"><a href="../user_profile?account_username={{request.session.username}}">'+new_rw_user+'</a> @ <a href="../user_profile?account_username='+new_rw_rp_id+'">'+new_rw_rp_name+'</a>     '+new_cm_time+'</p>')                           
+                                    } else {
+                                        alert("Please Login first.");
+                                        $('#regist-box').show();
+                                    }
+                                }     
+                            )
+                            return false;
+                        }
+                    });
+                })
+            });
+            
+            // upload_photo
+            $('#img_upload').change(function(){
+                var fileDom = document.getElementById('img_upload');
+                var app_form = document.getElementById('show_img1');
+                var acc_id = document.getElementById('store_acc_id').innerHTML;
+                var rw_id = document.getElementById('store_rw_id').innerHTML;
+                var file = fileDom.files[0];
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(e)
+                {$.post(
+                    "{% url 'upload_review_photo' %}",  
+                    // data
+                    {
+                        "img": reader.result,
+                        "acc_id": acc_id,
+                        "reriew_id": rw_id,
+                    },  
+                    // callback
+                    function(json){
+                        var rw = document.getElementById('store_rw_id');
+                        var img_show = document.createElement('img');
+                        img_show.setAttribute('src', json['img_url']);
+                        img_show.setAttribute('name', 'show_img');
+                        //img_show.id = "img"+el.length.toString();
+                        var div = document.createElement('div');
+                        div.setAttribute('class', 'geodir-category-img');
+                        div.style.width = '260px';
+                        div.style.marginRight = '20px';
+                        div.style.padding = '10px';
+                        var a = document.createElement('a');
+                        a.appendChild(img_show);
+                        div.appendChild(a);
+                        var a2 = document.createElement('a');
+                        a2.setAttribute('class', 'ed-btn');
+                        a2.style.color = 'rgb(60, 115, 218)';
+                        a2.innerHTML = 'Delete';
+                        a2.addEventListener('click', function(){
+                            div.style.display='None';
+                            $.post(
+                                "{% url 'delete_review_photo' %}",
+                                {
+                                    "img" : img_show.src,
+                                    "review_id" : rw_id,
+                                },
+                                function(){
+                                    app_form.removeChild(div);
+                                }
+                            )
+                        });
+                        div.appendChild(a2);
+                        app_form.appendChild(div);
+                        rw.innerHTML = json['review_id'];
+                    },
+                )}
+                return false;
+            });
+            // delete images
+            var img_list = new Array();
+            $(function(){
+                $("div#show_img1").find("[id]").each(function(){  
+                    var id = $(this).attr("id");  
+                    img_list.push(id);
+                });
+                console.log(img_list);
+                img_list.forEach((item,index,array)=>{
+                    $(document).on('click', '#'+item, function(){
+                        console.log(item);
+                        img_name = "img_"+item;
+                        a_name = "a_"+item;
+                        var div = document.getElementById(img_name);
+                        $('#'+img_name).hide();
+                        
+                        var acc_id = document.getElementById('acc_id').innerHTML;
+                        
+                        var url = document.getElementById(a_name).src;
+                        $.post(
+                            '{% url 'delete_photo' %}',  
+                            // data
+                            {
+                                "img": url,
+                                "acc_id": acc_id
+                            }, 
+                            function(){
+                                document.getElementById('show_img1').removeChild(div);
+                            }
+                        )
+                        return false;
+                    });
+                })
+            });
+            // add new reviews
+            $(document).on('click', '#add_review_button', function(){
+                var my_score = $('#review_score').val();
+                var my_review = $('#review_text').val();
+                var acc_id = document.getElementById('store_acc_id').innerHTML;
+                console.log(my_score);
+                console.log(my_review);
+                // review images
+                // retrieve all image links
+                var img_elements = document.getElementsByName('show_img');
+                var imgs = new Array();
+                img_elements.forEach(element => {
+                    imgs.push(element.src);
+                });
+                var imgs_json_str = JSON.stringify(imgs).toString();
+                if(my_review.replace(/\s/g, "").length ==0){
+                    alert("Review cannot be empty.");
+                    return false;
+                } 
+                $.post(
+                    '{% url 'add_reviews' accommodation.id %}',  
+                    // data
+                    {
+                        "my_score": my_score,
+                        "my_review": my_review,
+                        "imgs_url": imgs_json_str,
+                    },  
+                    function(json){
+                        var status = json['status'];
+                        if(status == '200'){
+                            window.location.href ="../listing_single?acc_id="+acc_id;
+                        } else {
+                            alert("Please Login first.");
+                            $('#regist-box').show();
+                        }        
+                    }
+                )
+                
+            })
+        </script>          
+    </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "meta-sanctum-256202",
+  "private_key_id": "449e7001109e2ecccda4994b08686e2057b09df2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCxgBQy7dLBdUxN\nC7S7ufPJ1G5ViuGZ0urxETgp6zayeMSZAdYpvYdXsz/bOAsOI5ZkBuyiTGIdjmjo\nxM20eS7uFKEWWXWi9dmlxY6sXmqNqP1cQb+iexup/5cX+jixzDscM4YEzq6CphGl\nTGgi8lUBQDpmrJP2Uq2YAvHoZ3A9scCDStGcBEpgmEmCEdg2ang9UjMQQwn7mqdn\n7GjW2N5Mt2AtM3dFyaZ0rK4nZ/sQpgLBaJFObi3dLE6vvRA1KHoTd1FNklRd1JWO\ngKXOCn4UzxDU/IoXLj7sSaYvSH960pc6mlkNITrIeOyDJL0WxTnOnWX6BGQis5J3\n6FKw4gaBAgMBAAECggEACcp10sVZjcBJoCpYIs7ECssD9wX9Ib4HpZp8jZti3f9Z\nYNNAG/dPYuAJUq9JtNLztbrIDL/H3beAQ+6vJhhVJV7P7+qpWX7ULZezIgDnQb8j\nkpYx2uWNhhgKHpF31R7d19VjvBomeCBu8r4/NEZHuBTx4737P2gaGTt4WohyIYT3\nxnQPGPKkgQZI5GT03n9WR7YHd+c/TCu9Ywi4ymvfBLXsjH8sZMzXoTNUppRCONKo\nSW4YUhRbt9Sm5XTb41B8efmcjeSy2MwH8VAgVeFqsCbjCKU6BAjKI3wGOnigZjiM\n93jmyxmAPdGDQ/S/MvGP22cFnEU+bGUPf7YAX6p40QKBgQD1+DlaN1WJxO3pKwNn\nOassoZawOUBbo2FNojcMDO3ZyyPMIi7c3xsh/JQjgkh0GmFs2W271NFEGQkBuGW4\nxWb3mcW3GoB8oja0yVJeU47Wvr7IU4sCdLYMSmsRErnVjh/TNt5wpFOtGWmiKh4d\nxWDQfSyUnbj7r0y5Zm3RwR4VBQKBgQC4vRN7JWQ4znSiAl8C6DIsuqg8hjrAzEnz\n9HB4idp8f4biQ9UFwpWPTQridpp6WdgETVyBwhSbSeIZMST3ihKt/pv3SW3+JqDe\n55etql9JdvPNUZ/L9CJbQuTDiCMadkwj07rlygM1NkPUegZ4P9jGuh2JiEgZ8P7B\ngLHyVi0kTQKBgQC3XQykTIvf4IbbQ82NrlgFNZD4XjW0Gt/21+7hdOH7coyFKRZ2\nYXwAoiJtNjp9Ew1977j2RXibo24rciOi0sYn3uKd1YvjXaoaq9pTp0bcn+XpwR3n\n/smX8AJQ//y5TvI6qrS4lEgsyr0MvwkkeHfr9OS/BbVZKx2vOMS1kZmzYQKBgQCD\n22ihN/IN3cY/sIOSNptBc8UK1h/vZqDOQEVas8I/pGJo81ODtfw7+RhwxYjDFYdq\norEJaLZ+lECODJa/HEzy5cz6tu2MPpQKJbEMYpN6gy3G+aCd2VYAX4Ga0nuDsrXr\nyH8Y7pRVkbLeYG5nu+KFDWhxttUHtwyOnsXkG4BC7QKBgAZHSEw//PsRNlebJ+cf\noYOYyURVOp4J/QYOv5TzJwnUwryxmQaZK3Vb3A5Xfp2Vq6At46VZ5uuKwapoDlcn\naCQ5Z8NcE3+L9Be3XZR+4LJTZ5TuDlukKf0DW3Hyv4+cb9ka8xX/QI+njMGOjUcI\nzQDBA0yOcbzbUfYL2Ax3K27k\n-----END PRIVATE KEY-----\n",
+  "client_email": "accommodation@meta-sanctum-256202.iam.gserviceaccount.com",
+  "client_id": "103266156415760976635",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/accommodation%40meta-sanctum-256202.iam.gserviceaccount.com"
+}

@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>AirNSW - Reservation</title>
+        {% include 'head.html' %}
+    </head>
+    <body>
+        <!--loader-->
+        <div class="loader-wrap">
+            <div class="pin">
+                <div class="pulse"></div>
+            </div>
+        </div>
+        <!--loader end-->
+        <!-- Main  -->
+        <div id="main">
+            <!-- header-->
+            <header class="main-header">
+                {% include 'header.html' %}
+             </header>
+            <!--  header end -->
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <div class="breadcrumbs-fs fl-wrap">
+                        <div class="container">
+                            <div class="breadcrumbs fl-wrap"><span id="count_down"></span></div>
+                        </div>
+                    </div>
+                    <section class="middle-padding gre y-blue-bg">
+                        <div class="container">
+                            <div class="list-main-wrap-title single-main-wrap-title fl-wrap">
+                                <h2>Booking form for : <span>Park Central</span></h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="bookiing-form-wrap">
+                                        <ul id="progressbar">
+                                            <li class="active"><span>01.</span>Personal Info</li>
+                                            <!-- <li><span>02.</span>Billing Address</li> -->
+                                            <li><span>03.</span>Payment Method</li>
+                                            <li><span>04.</span>Confirm</li>
+                                        </ul>
+                                        <!--   list-single-main-item -->
+                                        <div class="list-single-main-item fl-wrap hidden-section tr-sec">
+                                            <div class="profile-edit-container">
+                                                <div class="custom-form">
+                                                    <form>
+                                                        <fieldset class="fl-wrap">
+                                                            <div class="list-single-main-item-title fl-wrap">
+                                                                <h3>Your personal Information</h3>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label>Name <i class="far fa-user"></i></label>
+                                                                    <input type="text" readonly="readonly" placeholder="Your Name" value="{{ user.name }}"/>                                                  
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Email Address<i class="far fa-envelope"></i>  </label>
+                                                                    <input type="text" readonly="readonly" placeholder="yourmail@domain.com" value="{{ user.email }}"/>                                                  
+                                                                </div>
+                                                            </div>
+                                                            <div class="log-separator fl-wrap"><span>or</span></div>
+                                                            <span class="fw-separator"></span>
+                                                            <a  href="#"  class="next-form back-form action-button btn no-shdow-btn color-bg">Payment Step <i class="fal fa-angle-right"></i></a>
+                                                        </fieldset>
+                                                        <fieldset class="fl-wrap">
+                                                            <div class="list-single-main-item-title fl-wrap">
+                                                                <h3>Payment method</h3>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label>Cardholder's Name<i class="far fa-user"></i></label>
+                                                                    <input type="text" placeholder="" value="{{ user.name }}"/>                                                  
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Card Number <i class="fal fa-credit-card-front"></i></label>
+                                                                    <input id="payment_card" type="text" name="payment_card" placeholder="xxxx-xxxx-xxxx-xxxx" value=""/> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+                                                                    <label>Expiry Month<i class="fal fa-calendar"></i></label>
+                                                                    <input type="text" placeholder="MM" value="" id="expiry_month"/>                                                  
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label>Expiry Year<i class="fal fa-calendar"></i></label>
+                                                                    <input type="text" placeholder="YY" value="" id="expiry_year"/>                                                  
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label>CVV / CVC *<i class="fal fa-credit-card"></i></label>
+                                                                    <input type="password" placeholder="***" value="" id="cvv"/> 
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <p style="padding-top:20px;">*Three digits number on the back of your card</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="log-separator fl-wrap"><span>or</span></div>
+                                                            <span class="fw-separator"></span>
+                                                            <a  href="#"  class="previous-form  back-form action-button    color-bg"><i class="fal fa-angle-left"></i> Back</a>
+                                                            <a  href="#"  class="confirm_and_pay  action-button btn color2-bg no-shdow-btn" id="confirm_reservation">Confirm and Pay<i class="fal fa-angle-right"></i></a>                                               
+                                                        </fieldset>
+                                                        <fieldset class="fl-wrap">
+                                                            <div class="list-single-main-item-title fl-wrap">
+                                                                <h3>Confirmation</h3>
+                                                            </div>
+                                                            <div class="success-table-container">
+                                                                <div class="success-table-header fl-wrap">
+                                                                    <i class="fal fa-check-circle decsth"></i>
+                                                                    <h4>Thank you. Your reservation has been received.</h4>
+                                                                    <div class="clearfix"></div>
+                                                                    <p>Your payment has been processed successfully.</p>
+                                                                    <a href="../booking_history" target="_blank" class="color-bg">View your order</a>
+                                                                </div>
+                                                            </div>
+                                                            <span class="fw-separator"></span>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--   list-single-main-item end -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="box-widget-item-header">
+                                        <h3> Your  cart</h3>
+                                    </div>
+                                    <!--cart-details  --> 
+                                    <div class="cart-details fl-wrap">
+                                        <!--cart-details_header--> 
+                                        <div class="cart-details_header">
+                                            <a href="#"  class="widget-posts-img"><img src="{{ accommodation.album_address }}" class="respimg" alt=""></a>
+                                            <div class="widget-posts-descr">
+                                                <a href="#" title="">{{ accommodation.title }}</a>
+                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="{{ accommodation.star_rating }}"></div>
+                                                <div>
+                                                    <input type="text" id="lantitude" class="hid-input"  value="{{ lat }}">
+                                                    <input type="text" id="longtitude" class="hid-input"  value="{{ lng }}">
+                                                </div>
+                                                <div id="accommodation_add" class="geodir-category-location fl-wrap"><i class="fas fa-map-marker-alt"></i> </div>
+                                            </div>
+                                        </div>
+                                        <!--cart-details_header end-->       
+                                        <!--ccart-details_text-->          
+                                        <div class="cart-details_text">
+                                            <ul class="cart_list">
+                                                <li>Order Number <span id="check_in_date">{{ order_id }} </span></li>
+                                                <li>Room Type <span>{{ accommodation.property_size }} <strong>${{ accommodation.price }}</strong></span></li>
+                                                <li>From <span id="check_in_date">{{ check_in_date }} </span></li>
+                                                <li>To <span id="check_out_date">{{ check_out_date }} </span></li>
+                                                <li>Days<span id="total_days">{{ total_days }} </span></li>
+                                                <li>Guests <span id="guests_num">{{ guests_num }}</span></li>
+                                            </ul>
+                                        </div>
+                                        <!--cart-details_text end --> 
+                                    </div>
+                                    <!--cart-details end --> 
+                                    <!--cart-total --> 
+                                    <div class="cart-total">
+                                        <span class="cart-total_item_title">Total Cost</span>
+                                        <strong>${{ total_cost }}</strong>                                
+                                    </div>
+                                    <!--cart-total end -->                             
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+            <!--footer -->
+            <footer class="main-footer">
+                {% include 'footer.html' %}
+            </footer>
+            <!--footer end -->           
+            <!--register form -->
+            {% include 'login-signup-logout-tags.html' %}
+            <!--register form end -->
+            <a class="to-top"><i class="fas fa-caret-up"></i></a>
+        </div>
+        <!-- Main end -->
+        <!--=============== scripts  ===============-->
+        <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/js/plugins.js"></script>
+        <script type="text/javascript" src="../static/js/scripts_new.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7eqcPUwBmkn80owGULmLmMVEZFr-iv4&libraries=places&callback=initAutocomplete"></script>
+        <!--=============== our scripts  ===============-->
+        <script type="text/javascript">
+            // Login
+            $(document).on('submit', '#loginForm', function(){
+                var username =  $("#uName").val(); 
+                var password =  $("#uPass").val();
+                $.post(
+                    '{% url 'login' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#login-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // Signup
+            $(document).on('submit', '#signupForm', function(){
+                var username =  $("#signup_uName").val(); 
+                var password =  $("#signup_uPass").val();
+                var password2 =  $("#signup_uPass2").val();
+                $.post(
+                    '{% url 'signup' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password,
+                        "password2": password2
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#signup-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // logout
+            $(document).on('click', '#logout-link', function(){
+                $.get(
+                    '{% url 'logout' %}',  
+                    // data
+                    {},  
+                    // callback
+                    function(json){
+                        window.location.href ="../";
+                    },
+                )
+            });
+            // count the total days
+            $('#totaldays').change(function(){
+                if($(this).val() == "0"){
+                    $(this).val(0);
+                } else{
+                    var totalday = $(this).val();
+                    totalday -= 1;
+                    $(this).val(totalday);
+                }
+            });
+            // get address of the place by latitude and longtitude from google map
+            function geocodePosition(pos){
+                var geocoder;
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({
+                    latLng: pos
+                }, function(responses){
+                    if (responses && responses.length > 0) {
+                        console.log(responses[0].formatted_address)
+                        $('#accommodation_add').text(responses[0].formatted_address);
+                    } else {
+                        $('#accommodation_add').text('');
+                    }
+                });
+            }
+            $(window).load(
+                function(){
+                    var lng = $('#longtitude').val();
+                    var lat = $('#lantitude').val();
+                    var address = $('#accommodation_add').text();
+                    if (lng != "" && lat != "" && address == ""){
+                        lng = parseFloat(lng);
+                        lat = parseFloat(lat);
+                        geocodePosition(new google.maps.LatLng(lat, lng));
+                    }
+                }
+            );
+            // confirm reservation
+            $('#confirm_reservation').click(function(e){
+                var check_in_date = document.getElementById('check_in_date').innerHTML;
+                var check_out_date = document.getElementById('check_in_date').innerHTML;
+                var total_days = document.getElementById('total_days').innerHTML;
+                var guests_num = document.getElementById('guests_num').innerHTML;
+                var payment_card = $('#payment_card').val();
+                var expiry_month = $('#expiry_month').val();
+                var expiry_year = $('#expiry_year').val();
+                var cvv = $('#cvv').val();
+                var current_fs, next_fs, previous_fs;
+                var left, opacity, scale;
+                var animating;
+                // payment should not be empty
+                if (payment_card != '' && expiry_month != '' && expiry_year != '' && cvv != ''){
+                    $.post(
+                        '{% url "confirm_reservation" accommodation.id %}',
+                        // data
+                        {
+                            'check_in_date':check_in_date,
+                            'check_out_date':check_out_date,
+                            'guests_num':guests_num,
+                            'total_days':total_days,
+                            'payment_card':$('#payment_card').val(),
+                            'expiry_month':$('#expiry_month').val(),
+                            'expiry_year':$('#expiry_year').val(),
+                            'cvv':$('#cvv').val(),
+                        },
+                        function(json){
+                            var status = json['status'];
+                            var success_table_container = document.getElementsByClassName('success-table-container');
+                            var success_table = success_table_container[0];
+                            if (status == 'fail'){
+                                success_table.innerHTML = "<div class=\"fail-table-header fl-wrap\"><i class=\"fal fa-exclamation decsth\"></i><h4>Sorry, something wrong with you order.</h4><div class=\"clearfix\"></div><p>You can try and book it again.</p></div>"
+                            }
+                        }
+                    )
+                    e.preventDefault();
+                    if (animating) return false;
+                    animating = true;
+                    current_fs = $(this).parent();
+                    next_fs = $(this).parent().next();
+                    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+                    next_fs.show();
+                    current_fs.animate({
+                        opacity: 0
+                    }, {
+                        step: function (now, mx) {
+                            scale = 1 - (1 - now) * 0.2;
+                            left = (now * 50) + "%";
+                            opacity = 1 - now;
+                            current_fs.css({
+                                'transform': 'scale(' + scale + ')',
+                                'position': 'absolute'
+                            });
+                            next_fs.css({
+                                'left': left,
+                                'opacity': opacity,
+                                'position': 'relative'
+                            });
+                        },
+                        duration: 1200,
+                        complete: function () {
+                            current_fs.hide();
+                            animating = false;
+                        },
+                        easing: 'easeInOutBack'
+                    });
+                } else {
+                    alert("Please input all your card info!");
+                }
+            });
+            // time count down
+            var deadline_timestamp = {{ deadline|safe }};
+            var deadline_date = new Date(deadline_timestamp);
+            function formatType(n){
+                return n >= 0 && n < 10 ? '0' + n : '' + n;
+            }
+            clock();
+            function clock(){
+                var now = new Date();
+                var oldTime = now.getTime();
+                var newTime = deadline_date.getTime();
+                var second = Math.floor((newTime - oldTime) / 1000);
+                var remainSecond = second;
+                var minute = Math.floor(second / 60);
+                second %= 60;
+                var str_count_down = formatType(minute) + ':' + formatType(second);
+                if(remainSecond >0){
+                    document.getElementById("count_down").innerHTML = "  remain " + str_count_down + " to pay";
+                } else {
+                    window.location.href ="../booking_history";
+                }
+                
+                setTimeout(clock,500);
+            }
+        </script>
+    </body>
+</html>
