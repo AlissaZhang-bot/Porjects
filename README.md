@@ -2,7 +2,8 @@
 
 - Machine Learning
   - Recommendation system
-    - Collaborative filtering algorithms
+    - User-Based Collaborative Filtering 
+    - Item-Based Collaborative Filtering
 - Neural Network Deep Learning
   - Semantic segmentation
     - FCN
