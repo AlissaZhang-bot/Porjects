@@ -1,0 +1,862 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>AirNSW - Accommodation List</title>
+        {% include 'head.html' %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        <!--loader-->
+        <div class="loader-wrap">
+            <div class="pin">
+                <div class="pulse"></div>
+            </div>
+        </div>
+        <!--loader end-->
+        <!-- Main  -->
+        <div id="main">
+            <!-- header-->
+            <header class="main-header">
+               {% include 'header.html' %}
+            </header>
+            <!--  header end -->
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- Map -->
+                    <div class="map-container column-map right-pos-map fix-map hid-mob-map">
+                        <div id="map-main"></div>
+                        <ul class="mapnavigation">
+                            <li><a href="#" class="prevmap-nav"><i class="fas fa-caret-left"></i> Prev</a></li>
+                            <li><a href="#" class="nextmap-nav">Next <i class="fas fa-caret-right"></i></a></li>
+                        </ul>
+                        <div class="map-close"><i class="fas fa-times"></i></div>
+                        <input id="pac-input" class="controls fl-wrap controls-mapwn" type="text" placeholder="What Nearby ?">
+                    </div>
+                    <!-- Map end -->
+                    {% include 'chatbot.html' %}
+                    <!--col-list-wrap -->
+                    <div class="col-list-wrap left-list">
+                        <div class="mobile-list-controls fl-wrap">
+                            <div class="container">
+                                <div class="mlc show-hidden-column-map schm"><i class="fal fa-map-marked-alt"></i> Show Map</div>
+                                <div class="mlc show-list-wrap-search"><i class="fal fa-filter"></i> Filter</div>
+                            </div>
+                        </div>
+                        <!--list-wrap-search   -->
+                        <div class="list-wrap-search fl-wrap lws_mobile" id="lisfw" style="margin: 0px;">
+                            <div class="container" style="width: 100%;">
+                                <div class="row">
+                                    <!-- col-list-search-input-item -->
+                                    <div class="col-md-4">
+                                        <div class="col-list-search-input-item in-loc-dec fl-wrap not-vis-arrow">
+                                            <label> City</label>
+                                            <input id="search-location" type="text" placeholder="Hotel , City..." value="{{city}}"/>
+                                        </div>
+                                    </div>
+                                    <!-- col-list-search-input-item end -->                           
+                                    <!-- col-list-search-input-item -->
+                                    <div class="col-md-4">
+                                        <div class="col-list-search-input-item in-loc-dec date-container  fl-wrap">
+                                            <label>Date In-Out </label>
+                                            <span class="header-search-input-item-icon"><i class="fal fa-calendar-check"></i></span>
+                                            <input type="text"   placeholder="When" name="dates"   value="{{ date }}" id="search-date"/>
+                                        </div>
+                                    </div>
+                                    <!-- col-list-search-input-item end -->
+                                </div>
+                                <div class="search-opt-wrap fl-wrap">
+                                    <div class="search-opt-wrap-container">
+                                        <!-- col-list-search-input-item -->
+                                        <div class="search-input-item midd-input">
+                                            <div class="col-list-search-input-item fl-wrap">
+                                                <div class="quantity-item">
+                                                    <label>Rooms</label>
+                                                    <div class="quantity">
+                                                        <input id="search-rooms-quantity" type="number" min="1" max="3" step="1" value="{{rooms_quantity}}">
+                                                    </div>
+                                                </div>
+                                                <div class="quantity-item">
+                                                    <label>Adults</label>
+                                                    <div class="quantity">
+                                                        <input id="search-adults-quantity" type="number" min="1" max="3" step="1" value="{{adults_quantity}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- col-list-search-input-item end -->                              
+                                        <!-- col-list-search-input-item -->										
+                                        <div class="search-input-item small-input ">
+                                            <div class="col-list-search-input-item fl-wrap">
+                                                <button class="header-search-button" id="search-button">Search <i class="far fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <!-- col-list-search-input-item end -->
+                                        <!-- hidden-listing-filter -->
+                                        <div class="hidden-listing-filter fl-wrap">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <!--col-list-search-input-item -->
+                                                    <div class="col-list-search-input-item fl-wrap">
+                                                        <h4>Facilities</h4>
+                                                        <div class="search-opt-container fl-wrap">
+                                                            <!-- Checkboxes -->
+                                                            <ul class="fl-wrap filter-tags half-tags">
+                                                                <li>
+                                                                    {% if isAirconditioning %}
+                                                                    <input id="check_airconditioning" type="checkbox" name="check" checked>
+                                                                    {% else %}
+                                                                    <input id="check_airconditioning" type="checkbox" name="check">
+                                                                    {% endif %}
+                                                                    <label for="check_airconditioning">Air conditioning</label>
+                                                                </li>
+                                                                <li>
+                                                                    {% if isHeat %}
+                                                                    <input id="check_heat" type="checkbox" name="check" checked>
+                                                                    {% else %}
+                                                                    <input id="check_heat" type="checkbox" name="check">
+                                                                    {% endif %}
+                                                                    <label for="check_heat">Heat</label>
+                                                                </li>
+                                                            </ul>
+                                                            <!-- Checkboxes end -->
+                                                            <!-- Checkboxes -->
+                                                            <ul class="fl-wrap filter-tags half-tags">
+                                                                <li>
+                                                                    {% if isHairdryer %}
+                                                                    <input id="check_hairdryer" type="checkbox" name="check" checked>
+                                                                    {% else %}
+                                                                    <input id="check_hairdryer" type="checkbox" name="check">
+                                                                    {% endif %}
+                                                                    <label for="check_hairdryer">Hair dryer</label>
+                                                                </li>
+                                                                <li>
+                                                                    {% if isTV %}
+                                                                    <input id="check_tv" type="checkbox" name="check" checked>
+                                                                    {% else %}
+                                                                    <input id="check_tv" type="checkbox" name="check">
+                                                                    {% endif %}
+                                                                    <label for="check_tv">TV</label>
+                                                                </li>
+                                                                <li>
+                                                                    {% if isWifi %}
+                                                                    <input id="check_wifi" type="checkbox" name="check" checked>
+                                                                    {% else %}
+                                                                    <input id="check_wifi" type="checkbox" name="check">
+                                                                    {% endif %}
+                                                                    <label for="check_wifi">Wifi</label>
+                                                                </li>
+                                                            </ul>
+                                                            <!-- Checkboxes end -->
+                                                            <!-- Checkboxes -->
+                                                            <ul class="fl-wrap filter-tags half-tags">
+                                                                <li>
+                                                                    {% if isgym %}
+                                                                    <input id="check_gym" type="checkbox" name="check" checked>
+                                                                    {% else %}
+                                                                    <input id="check_gym" type="checkbox" name="check">
+                                                                    {% endif %}
+                                                                    <label for="check_gym">Fitness</label>
+                                                                </li>
+                                                                <li>              
+                                                                    {% if isParking %}
+                                                                    <input id="check_parking" type="checkbox" name="check" checked>
+                                                                    {% else %}                         
+                                                                    <input id="check_parking" type="checkbox" name="check">
+                                                                    {% endif %}
+                                                                    <label for="check_parking">Parking</label>
+                                                                </li>
+                                                                <li>
+                                                                    {% if ispool %}
+                                                                    <input id="check_pool" type="checkbox" name="check" checked>
+                                                                    {% else %}                                          
+                                                                    <input id="check_pool" type="checkbox" name="check">
+                                                                    {% endif %}
+                                                                    <label for="check_pool">Pool</label>
+                                                                </li>
+                                                            </ul>
+                                                            <!-- Checkboxes end -->
+                                                        </div>
+                                                    </div>
+                                                    <!--col-list-search-input-item end-->                                            
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- hidden-listing-filter end -->
+                                    </div>
+                                    <div class="show-more-filters act-hiddenpanel color3-bg"><i class="fal fa-plus"></i><span>More options</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--list-wrap-search end -->
+                        <!-- list-main-wrap-->
+                        <div class="list-main-wrap fl-wrap card-listing">
+                            <a class="custom-scroll-link back-to-filters" href="#lisfw"><i class="fas fa-angle-up"></i><span>Back to Filters</span></a>
+                            <div class="container" style="width: 100%; background-color: #efede7;">
+                                <!-- list-main-wrap-title-->
+                                <div class="list-main-wrap-title fl-wrap">
+                                    <h2>Results For : <span id="search_region">{{ search_region }}</span></h2>
+                                </div>
+                                <!-- list-main-wrap-title end-->
+                                <!-- list-main-wrap-opt-->
+                                <div class="list-main-wrap-opt fl-wrap">
+                                    <!-- price-opt-->
+                                    <div class="price-opt">
+                                        <span class="price-opt-title">Sort results by:</span>
+                                        <div class="listsearch-input-item">
+                                            <select data-placeholder="Popularity" class="chosen-select no-search-select" >
+                                                <option>Popularity</option>
+                                                <option>Average rating</option>
+                                                <option>Price: low to high</option>
+                                                <option>Price: high to low</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- price-opt end-->
+                                    <!-- price-opt-->
+                                    <div class="grid-opt">
+                                        <ul>
+                                            <li><span class="two-col-grid act-grid-opt"><i class="fas fa-th-large"></i></span></li>
+                                            <li><span class="one-col-grid"><i class="fas fa-bars"></i></span></li>
+                                        </ul>
+                                    </div>
+                                    <!-- price-opt end-->                             
+                                </div>
+                                <!-- list-main-wrap-opt end-->
+                                <!-- listing-item-container -->
+                                <!-- searching listing -->
+                                <div class="listing-item-container init-grid-items fl-wrap" id="like">
+                                    {% for item in ret %}
+                                    <!-- listing-item  -->
+                                    <div class="listing-item" name="acc_item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <a href="../listing_single?acc_id={{item.id}}"><img src="{{ item.album_address }}" alt=""></a>
+                                                
+                                                <div class="geodir-category-opt">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="{{ item.avg_rating }}"></div>
+                                                    <div class="rate-class-name">
+                                                        <div class="score">{{ item.reviews_num }} Reviews </div>
+                                                        <span>{{ item.avg_rating }}</span>                                             
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap title-sin_item">
+                                                <div class="geodir-category-content-title-item">
+                                                    <h3 class="title-sin_map"><a href="../listing_single?acc_id={{item.id}}">{{ item.title }}</a></h3>
+                                                    <input type="text" class="hid-input" value="{{ item.lat }}">
+                                                    <input type="text" class="hid-input" value="{{ item.lng }}">
+                                                    <!-- <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> {{ item.address }}</a></div> -->
+                                                </div>
+                                                <div class="geodir-category-footer fl-wrap">
+                                                    <div class="geodir-category-price">Awg/Night <span>$ {{item.price}}</span></div>
+                                                    <div class="geodir-opt-list">
+                                                        {% if item.id in likes %}
+                                                        <a class="geodir-js-favorite"><i class="fas fa-heart" id="{{item.id}}"></i><span class="geodir-opt-tooltip">Save</span></a>
+                                                        {% else %}
+                                                        <a class="geodir-js-favorite"><i class="fal fa-heart" id="{{item.id}}"></i><span class="geodir-opt-tooltip">Save</span></a>
+                                                        {% endif %}
+                                                        <!-- <a href="#" class="geodir-js-booking"><i class="fal fa-exchange"></i><span class="geodir-opt-tooltip">Find Directions</span></a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end -->
+                                    {% endfor %}
+                                </div>
+                                <!-- listing-item-container end-->
+                                <!-- pagination-->
+                                <div class="pagination">
+                                    <a href="{{current_path}}&page=1" class="prevposts-link"><i class="fa fa-angle-double-left"></i></a>
+                                    {% if has_previous %}
+                                        <a href="{{current_path}}&page={{previous_page}}" class="prevposts-link"><i class="fa fa-angle-left"></i></a>
+                                    {% endif %}
+                                    <!-- <div class="price-opt"> -->
+                                        <span class="price-opt-title">Page:</span>
+                                        <!-- <div class="listsearch-input-item"> -->
+                                            <select id="all_listing_page" value="{{page}}" class="form-control" style="display: inline-block;width:auto;">
+                                                {% for pg in page_range %}
+                                                    {% if pg == curr_page %}
+                                                        <option selected="selected">{{pg}}</option>
+                                                    {% else %}
+                                                        <option>{{pg}}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        <!-- </div> -->
+                                    <!-- </div> -->
+                                    {% if has_next %}
+                                        <a href="{{current_path}}&page={{next_page}}" class="nextposts-link"><i class="fa fa-angle-right"></i></a>
+                                    {% endif %}
+                                    <a href="{{current_path}}&page={{nb_of_pages}}" class="nextposts-link"><i class="fa fa-angle-double-right"></i></a>
+                                    
+                                </div>
+                                <!-- pagination end-->
+                            </div>
+                        </div>
+                        <!-- list-main-wrap end-->
+                    </div>
+                    <!--col-list-wrap end -->
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+            <!--footer -->
+            <footer class="main-footer">
+                {% include 'footer.html' %}
+            </footer>
+            <!--footer end -->
+            <!--register form -->
+            {% include 'login-signup-logout-tags.html' %}
+            <!--register form end -->
+            <a class="to-top"><i class="fas fa-caret-up"></i></a>
+        </div>
+        <!-- Main end -->
+        <!--=============== scripts  ===============-->
+        <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/js/plugins.js"></script><!-- added -->
+        <script type="text/javascript" src="../static/js/scripts_new.js"></script><!-- changed -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7eqcPUwBmkn80owGULmLmMVEZFr-iv4&libraries=places&callback=initAutocomplete"></script>
+        <script type="text/javascript" src="../static/js/mapplugins_new.js"></script><!-- changed -->
+        <script type="text/javascript" src="../static/js/chatbot.js"></script>  
+        <!-- <script type="text/javascript" src="../static/js/maps.js"></script> --><!-- added -->
+        <!--=============== our scripts  ===============-->
+        <script type="text/javascript">
+            // search 
+            $(document).on('click', '#search-button', function(){
+                var city =  $("#search-location").val();
+                var date =  $("#search-date").val();
+                var adults_quantity =  $("#search-adults-quantity").val();
+                var rooms_quantity =  $("#search-rooms-quantity").val();
+                var isAirconditioning = $('#check_airconditioning').prop('checked');
+                var isHeat = $('#check_heat').prop('checked');
+                var isHairdryer = $('#check_hairdryer').prop('checked');
+                var isTV = $('#check_tv').prop('checked');
+                var isWifi = $('#check_wifi').prop('checked');
+                var isgym = $('#check_gym').prop('checked');
+                var isParking = $('#check_parking').prop('checked');
+                var ispool = $('#check_pool').prop('checked');
+                data = {};
+                $.get(
+                    '',  
+                    // data
+                    {
+                    },  
+                    // callback
+                    function(json){
+                        var herf = "../listing?city="+city+"&date="+date+"&adults_quantity="+adults_quantity+"&rooms_quantity="+rooms_quantity;
+                        if(isAirconditioning == true){
+                            herf += "&isAirconditioning="+isAirconditioning;
+                        }
+                        if(isHeat == true){
+                            herf += "&isHeat="+isHeat;
+                        }
+                        if(isHairdryer == true){
+                            herf += "&isHairdryer="+isHairdryer;
+                        }
+                        if(isTV == true){
+                            herf += "&isTV="+isTV;
+                        }
+                        if(isWifi == true){
+                            herf += "&isWifi="+isWifi;
+                        }
+                        if(isgym == true){
+                            herf += "&isgym="+isgym;
+                        }
+                        if(isParking == true){
+                            herf += "&isParking="+isParking;
+                        }
+                        if(ispool == true){
+                            herf += "&ispool="+ispool;
+                        }
+                        window.location.href = herf;
+                    },
+                )
+            });
+            // Login
+            $(document).on('submit', '#loginForm', function(){
+                var username =  $("#uName").val(); 
+                var password =  $("#uPass").val();
+                $.post(
+                    '{% url 'login' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password
+                    },  
+                    // callback
+                    function(json){
+                        //sessionStorage.setItem('username', username);
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#login-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // Signup
+            $(document).on('submit', '#signupForm', function(){
+                var username =  $("#signup_uName").val(); 
+                var password =  $("#signup_uPass").val();
+                var password2 =  $("#signup_uPass2").val();
+                $.post(
+                    '{% url 'signup' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password,
+                        "password2": password2
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#signup-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // logout
+            $(document).on('click', '#logout-link', function(){
+                $.get(
+                    '{% url 'logout' %}',  
+                    // data
+                    {},  
+                    // callback
+                    function(json){
+                        $("#signin-icon").show();
+                        $("#posting-icon").hide();
+                        $("#request-icon").hide();
+                        $("#header_show_img").hide();
+                        $("#welcome").removeClass().addClass("header-user-name");
+                        $("#welcome-list").removeClass();
+                        $("a#user_protrait").text("My Account");
+                        $("a#user_protrait").attr("href", "");
+                    },
+                )
+            });
+
+            // pagination
+            $(function(){
+                // bind change event to select
+                $('#all_listing_page').on('change', function () {
+                    var page = $(this).val(); // get selected value
+                    var curr_url = window.location.href;
+                    if (page) { // require a URL
+                        window.location = curr_url + '&page='+page; // redirect
+                    }
+                    return false;
+                });
+            });
+
+            // get username
+            var get_name = document.getElementById('get_username').innerHTML;
+            console.log(get_name);
+
+            var fav_list = new Array();
+            $(function(){
+                $("div#like").find("[id]").each(function(){  
+                    var id = $(this).attr("id");  
+                    fav_list.push(id);
+                });
+                console.log(fav_list);
+                fav_list.forEach((item,index,array)=>{
+                    $(document).on('click', '#'+item, function(){
+                        
+                        if (get_name == 'need_login'){
+                            alert("You need to login first");
+                            $('#regist-box').show();
+                        } else{
+                            console.log(item);
+                        
+                            var class_name = document.getElementById(item).className;
+                            console.log(class_name);
+                            if (class_name == 'fal fa-heart'){
+                                //alert(2);
+                                $("#"+item).removeClass().addClass("fas fa-heart");
+                                $.get(
+                                    '{% url 'favourite' %}',  
+                                    // data
+                                    {
+                                        'acc_id': item
+                                    },  
+                                )
+                            } else if (class_name == 'fas fa-heart') {
+                                //alert(3);
+                                $("#"+item).removeClass().addClass("fal fa-heart");
+                                $.get(
+                                    '{% url 'undo' %}',  
+                                    // data
+                                    {
+                                        'acc_id': item
+                                    },  
+                                )
+                            }
+                        }
+                    });
+                });
+            });
+            // get lat and lng
+            // divid lat and lng from string
+            function formalize_latlng(latlng_str){
+                var latlng = latlng_str.replace("(","");
+                latlng = latlng.replace(")","");
+                latlng = latlng.replace(" ","");
+                var latlng_list = latlng.split(",");
+                var lat = parseFloat(latlng_list[0]);
+                var lng = parseFloat(latlng_list[1]);
+                return [lat, lng];
+            };
+            // get address of the place by latitude and longtitude from google map
+            function geocodePosition(obj,pos){
+                var geocoder;
+                geocoder = new google.maps.Geocoder();
+                console.log(pos);
+                geocoder.geocode({
+                    latLng: pos
+                }, function(responses){
+                    console.log(responses[0].formatted_address)
+                    if (responses && responses.length > 0) {
+                        obj.innerHTML = responses[0].formatted_address;
+                        /* return responses[0].formatted_address; */
+                    } else {
+                        obj.innerHTML = "";
+                        /* return ""; */
+                    }
+                });
+            }
+
+        (function ($) {
+            "use strict";
+            var markerIcon = {
+                anchor: new google.maps.Point(12, 0),
+                url: '../static/images/marker.png',
+                labelOrigin: new google.maps.Point(25, 20)
+            }
+            function mainMap() {
+                function locationData(locationURL, locationImg, locationTitle, locationPrice, locationStarRating) {
+                    return ('<div class="map-popup-wrap"><div class="map-popup"><div class="infoBox-close"><i class="far fa-times"></i></div><a href="' + locationURL + '" class="listing-img-content fl-wrap"><img src="' + locationImg + '" alt=""><span class="map-popup-location-price"><strong>Awg/Night</strong>' + locationPrice + '</span></a> <div class="listing-content fl-wrap"><div class="card-popup-raining map-card-rainting" data-staRrating="' + locationStarRating + '"></div><div class="listing-title fl-wrap"><h4><a href=' + locationURL + '>' + locationTitle + '</a></h4><span class="map-popup-location-info"></span></div></div></div></div>')
+                }
+                //  Map Infoboxes ------------------
+                var ll = {{ ret|safe }};
+                var locations = new Array();
+                var elements = document.getElementsByName('acc_item');
+
+                var currentInfobox;
+                var map = new google.maps.Map(document.getElementById('map-main'), {
+                    zoom: 12,
+                    scrollwheel: false,
+                    center: new google.maps.LatLng({{ lat|safe }}, {{ lng|safe }}),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    zoomControl: false,
+                    mapTypeControl: false,
+                    scaleControl: false,
+                    panControl: false,
+                    fullscreenControl: true,
+                    navigationControl: false,
+                    streetViewControl: false,
+                    animation: google.maps.Animation.BOUNCE,
+                    gestureHandling: 'cooperative',
+                    styles: [{
+                            "featureType": "poi.attraction",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        },
+                        {
+                            "featureType": "poi.business",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        },
+                        {
+                            "featureType": "poi.medical",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        },
+                        {
+                            "featureType": "poi.place_of_worship",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        },
+                        {
+                            "featureType": "poi.school",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        },
+                        {
+                            "featureType": "transit.station.bus",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+
+                        }
+                    ]
+                });
+
+                elements.forEach(element => {
+                    var child_elements1 = element.children[0].children[0];
+                    var locationURL = child_elements1.children[0].href; // listing url
+                    var locationImg = child_elements1.children[0].children[0].src;
+                    var locationStarRating = child_elements1.children[1].children[1].children[1].innerHTML;
+                    
+                    var child_elements2 = element.children[0].children[1];
+                    var locationTitle = child_elements2.children[0].children[0].children[0].innerHTML;
+                    var locationPrice = child_elements2.children[1].children[0].children[0].innerHTML;
+                    var lat = child_elements2.children[0].children[1].value;
+                    var lng = child_elements2.children[0].children[2].value;
+                    var location = [locationData(locationURL, locationImg, locationTitle, locationPrice, locationStarRating), lat, lng, markerIcon];
+                    
+                    locations.push(location);
+
+                    element.addEventListener('mouseover', (function () {
+                        return function () {
+                            ib.setOptions(boxOptions);
+                            boxText.innerHTML = location[0];
+                            ib.close();
+                            ib.open(map, marker);
+                            currentInfobox = marker.id;
+                            var latLng = new google.maps.LatLng(location[1], location[2]);
+                            map.panTo(latLng);
+                            map.setCenter(latLng);
+                            map.setZoom(18);
+                            map.panBy(0, -50);
+                            google.maps.event.addListener(ib, 'domready', function () {
+                                $('.infoBox-close').click(function (e) {
+                                    e.preventDefault();
+                                    ib.close();
+                                });
+                            });
+                        }
+                    })(marker, i));
+                });
+                /* for (var i = 0; i < ll.length; i++) {
+                    console.log(ll[i].lat);
+                    locations.push([locationData('listing-single.html', 'images/gal/1.jpg', 'Premium Plaza Hotel', "$ 320", "5"), ll[i].lat, ll[i].lng, markerIcon]);
+                } */
+                //   Map Infoboxes end ------------------
+                var boxText = document.createElement("div");
+                boxText.className = 'map-box'
+                /* var currentInfobox; */
+                var boxOptions = {
+                    content: boxText,
+                    disableAutoPan: true,
+                    alignBottom: true,
+                    maxWidth: 0,
+                    pixelOffset: new google.maps.Size(-137, -25),
+                    zIndex: null,
+                    boxStyle: {
+                        width: "260px"
+                    },
+                    closeBoxMargin: "0",
+                    closeBoxURL: "",
+                    infoBoxClearance: new google.maps.Size(1, 1),
+                    isHidden: false,
+                    pane: "floatPane",
+                    enableEventPropagation: false,
+                };
+
+                var markerCluster, marker, i;
+                var allMarkers = [];
+                var clusterStyles = [{
+                    textColor: 'white',
+                    url: '',
+                    height: 50,
+                    width: 50
+                }];
+                for (i = 0; i < locations.length; i++) {
+                    var labels = '123456789';
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        icon: locations[i][4],
+                        id: i,
+                        label: {
+                            text: "" + (i + 1),
+                            color: "#3AACED",
+                            fontSize: "11px",
+                            fontWeight: "bold",
+                        },
+                    });
+                    allMarkers.push(marker);
+                    var ib = new InfoBox();
+                    google.maps.event.addListener(ib, "domready", function () {
+                        cardRaining()
+                    });
+                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                        console.log("click on marker")
+                        return function () {
+                            ib.setOptions(boxOptions);
+                            boxText.innerHTML = locations[i][0];
+                            ib.close();
+                            ib.open(map, marker);
+                            currentInfobox = marker.id;
+                            var latLng = new google.maps.LatLng(locations[i][1], locations[i][2]);
+                            map.panTo(latLng);
+                            map.panBy(0, -50);
+                            google.maps.event.addListener(ib, 'domready', function () {
+                                $('.infoBox-close').click(function (e) {
+                                    e.preventDefault();
+                                    ib.close();
+                                });
+                            });
+                        }
+                    })(marker, i));
+                }
+                var options2 = {
+                    imagePath: '../static/images/',
+                    styles: clusterStyles,
+                    minClusterSize: 2
+                };
+                markerCluster = new MarkerClusterer(map, allMarkers, options2);
+                google.maps.event.addDomListener(window, "resize", function () {
+                    var center = map.getCenter();
+                    google.maps.event.trigger(map, "resize");
+                    map.setCenter(center);
+                });
+                if ($(".controls-mapwn").length) {
+                    var input = document.getElementById('pac-input');
+                    var searchBox = new google.maps.places.SearchBox(input);
+                    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                    map.addListener('bounds_changed', function () {
+                        searchBox.setBounds(map.getBounds());
+                    });
+                    var markers = [];
+                    searchBox.addListener('places_changed', function () {
+                        var places = searchBox.getPlaces();
+
+                        if (places.length == 0) {
+                            return;
+                        }
+                        markers.forEach(function (marker) {
+                            marker.setMap(null);
+                        });
+                        markers = [];
+
+                        var bounds = new google.maps.LatLngBounds();
+                        places.forEach(function (place) {
+                            if (!place.geometry) {
+                                console.log("Returned place contains no geometry");
+                                return;
+                            }
+                            var icon = {
+                                url: place.icon,
+                                size: new google.maps.Size(71, 71),
+                                origin: new google.maps.Point(0, 0),
+                                anchor: new google.maps.Point(17, 34),
+                                scaledSize: new google.maps.Size(25, 25)
+                            };
+                            markers.push(new google.maps.Marker({
+                                map: map,
+                                icon: icon,
+                                title: place.name,
+                                position: place.geometry.location
+                            }));
+
+                            if (place.geometry.viewport) {
+                                bounds.union(place.geometry.viewport);
+                            } else {
+                                bounds.extend(place.geometry.location);
+                            }
+                        });
+                        map.fitBounds(bounds);
+                    });
+                }
+                $('.map-item').on("click", function (e) {
+                    e.preventDefault();
+                    map.setZoom(15);
+                    var index = currentInfobox;
+                    var marker_index = parseInt($(this).attr('href').split('#')[1], 10);
+                    google.maps.event.trigger(allMarkers[marker_index], "click");
+                    if ($(window).width() > 1064) {
+                        if ($(".map-container").hasClass("fw-map")) {
+                            $('html, body').animate({
+                                scrollTop: $(".map-container").offset().top + "-110px"
+                            }, 1000)
+                            return false;
+                        }
+                    }
+                });
+                $('.nextmap-nav').on("click", function (e) {
+                    e.preventDefault();
+                    map.setZoom(15);
+                    var index = currentInfobox;
+                    if (index + 1 < allMarkers.length) {
+                        google.maps.event.trigger(allMarkers[index + 1], 'click');
+                    } else {
+                        google.maps.event.trigger(allMarkers[0], 'click');
+                    }
+                });
+                $('.prevmap-nav').on("click", function (e) {
+                    e.preventDefault();
+                    map.setZoom(15);
+                    if (typeof (currentInfobox) == "undefined") {
+                        google.maps.event.trigger(allMarkers[allMarkers.length - 1], 'click');
+                    } else {
+                        var index = currentInfobox;
+                        if (index - 1 < 0) {
+                            google.maps.event.trigger(allMarkers[allMarkers.length - 1], 'click');
+                        } else {
+                            google.maps.event.trigger(allMarkers[index - 1], 'click');
+                        }
+                    }
+                });
+                var zoomControlDiv = document.createElement('div');
+                var zoomControl = new ZoomControl(zoomControlDiv, map);
+                function ZoomControl(controlDiv, map) {
+                    zoomControlDiv.index = 1;
+                    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(zoomControlDiv);
+                    controlDiv.style.padding = '5px';
+                    var controlWrapper = document.createElement('div');
+                    controlDiv.appendChild(controlWrapper);
+                    var zoomInButton = document.createElement('div');
+                    zoomInButton.className = "mapzoom-in";
+                    controlWrapper.appendChild(zoomInButton);
+                    var zoomOutButton = document.createElement('div');
+                    zoomOutButton.className = "mapzoom-out";
+                    controlWrapper.appendChild(zoomOutButton);
+                    google.maps.event.addDomListener(zoomInButton, 'click', function () {
+                        map.setZoom(map.getZoom() + 1);
+                    });
+                    google.maps.event.addDomListener(zoomOutButton, 'click', function () {
+                        map.setZoom(map.getZoom() - 1);
+                    });
+                }
+            }
+            var map = document.getElementById('map-main');
+            if (typeof (map) != 'undefined' && map != null) {
+                google.maps.event.addDomListener(window, 'load', mainMap);
+            }
+        })(this.jQuery);
+        </script>        
+    </body>
+</html>

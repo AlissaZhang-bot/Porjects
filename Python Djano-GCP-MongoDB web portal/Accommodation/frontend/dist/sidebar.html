@@ -1,0 +1,32 @@
+<div class="dasboard-sidebar-content fl-wrap">
+        <div class="dasboard-avatar">
+            <img id="avatar_show_img" src="{{ show_img}}" alt="">
+        </div>
+        <div class="dasboard-sidebar-item fl-wrap">
+            <h3>
+                <span>Welcome </span>
+                {% if request.session.username %} 
+                    {{ request.session.username }}
+                {% else %}
+                    My Account
+                {% endif %}
+            </h3>
+        </div>
+        <!-- <a href="../user_listings" class="ed-btn">Add Hotel</a>                                         -->
+        <div class="user-stats fl-wrap">
+            <ul>
+                <li>
+                    Listings	
+                    <span>{{ listing_num }}</span>
+                </li>
+                <li>
+                    Bookings
+                    <span>{{booking_num}}</span>	
+                </li>
+                <li>
+                    Reviews	
+                    <span>{{reviews_num}}</span>	
+                </li>
+            </ul>
+        </div>
+    </div>

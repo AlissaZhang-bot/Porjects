@@ -1,0 +1,39 @@
+<div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
+<ul class="dasboard-menu-wrap">
+    <li>
+        <a id="dash_profile" href="../edit_profile"><i class="far fa-user"></i>Profile</a>
+        <ul>
+            <li><a href="../edit_profile">Edit Profile</a></li>
+            <li><a href="../change_password">Change UPass</a></li>
+            <li><a href="../user_profile?account_username={{request.session.username}}">View Profile</a></li>
+        </ul>
+    </li>
+    <li>
+        <a id="dash_request" href="../user_requests"><i class="far fa-envelope"></i> My Requests <span>{{count_requests}}</span></a>
+        <ul>
+            <li><a href="../user_request_active">Active</a><span>{{count_active_request}}</span></li>
+            <li><a href="../user_request_pending">Pending</a><span>{{count_pending_request}}</span></li>
+        </ul>
+    </li>
+    <li>
+        <a id="dash_listing" class="user-profile-act" href="../user_listings"><i class="far fa-th-list"></i> My listings <span>{{count_listing}}</span> </a>
+        <ul>
+            <li><a href="../user_listings_active">Active</a><span>{{count_active}}</span></li>
+            <li><a href="../user_listings_pending">Pending</a><span>{{count_pending}}</span></li>
+        </ul>
+    </li>
+    <li>
+        <a id="dash_booking" href="../booking_history"> <i class="far fa-calendar-check"></i> Bookings <span>{{booking_num}}</span></a>
+        <ul>
+            <li><a href="../booking_history?host_or_visitor=visitor">As visitor</a><span>{{booking_num_as_visitor}}</span></li>
+            <li><a href="../booking_history?host_or_visitor=host">As host</a><span>{{booking_num_from_visitor}}</span></li>
+        </ul>
+    </li>
+    <li>
+        <a id="dash_review"><i class="far fa-comments"></i> My Reviews <span>{{reviews_num}}</span> </a>
+        <ul>
+            <li><a href="../reviews_for_host">From Guests</a><span>{{count_reviews_from_guests}}</span></li>
+            <li><a href="../user_reviews">My Replies</a><span>{{count_my_replies}}</span></li>
+        </ul>
+    </li>
+</ul>

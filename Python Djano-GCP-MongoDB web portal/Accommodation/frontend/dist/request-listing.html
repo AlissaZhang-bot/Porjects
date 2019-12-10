@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+       <title>AirNSW - List</title>
+       {% include 'head.html' %}
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    </head>
+    <body>
+        <!--loader-->
+        <div class="loader-wrap">
+            <div class="pin">
+                <div class="pulse"></div>
+            </div>
+        </div>
+        <!--loader end-->
+        <!-- Main  -->
+        <div id="main">
+            <!-- header-->
+            <header class="main-header">
+                {% include 'header.html' %}
+            </header>
+            <!--  header end -->
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    <section class="flat-header color-bg adm-header" style="background-color: #c0b3a0;">
+                        <div class="wave-bg wave-bg2"></div>
+                        <div class="container">
+                            <div class="dasboard-wrap fl-wrap">
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end-->
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--search -->
+                            <div class="dasboard-wrap fl-wrap" style="padding: 0px; margin-bottom: 100px">
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="main-search-input-wrap">
+                                        <div class="main-search-input fl-wrap">
+                                            <div class="main-search-input-item location" id="autocomplete-container">
+                                                <span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
+                                                <input id="search-location" type="text" placeholder="City..." class="autocomplete-input" value=""/>
+                                            </div>
+                                            <div class="main-search-input-item">
+                                                <div class="qty-dropdown fl-wrap">
+                                                    <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Persons</div>
+                                                    <div class="qty-dropdown-content fl-wrap">
+                                                        <div class="quantity-item">
+                                                            <label><i class="fas fa-male"></i> Adults</label>
+                                                            <div class="quantity">
+                                                                <input id="search-adults-quantity" type="number" min="1" max="3" step="1" value="1">
+                                                            </div>
+                                                        </div>
+                                                        <div class="quantity-item">
+                                                            <label><i class="far fa-bed"></i> Rooms</label>
+                                                            <div class="quantity">
+                                                                <input id="search-rooms-quantity" type="number" min="1" max="3" step="1" value="1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="main-search-button color2-bg" id="search-button">Search <i class="fal fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--search end-->
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap" style="margin-top: 40px; padding: 0px; width: 80%; left: 10%;">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="dashboard-list-box fl-wrap">
+                                       
+                                        {% for item in user_requests.all %}
+                                        <!-- dashboard-list  -->    
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <div class="dashboard-listing-table-image">
+                                                    <a href="../request_single?request_id={{item.id}}"><img style="width:180px; height:120px;" src="../static/images/request.png" alt=""></a>
+                                                </div>
+                                                <div class="dashboard-listing-table-text">
+                                                    <h4><a href="../request_single?request_id={{item.id}}">{{item.title}}</a></h4>
+                                                    {% if item.is_public %} 
+                                                    <span class="dashboard-listing-table-address"><a  href="#">Active</a></span>
+                                                    {% else %}
+                                                    <span class="dashboard-listing-table-address"><a  href="#">Pending</a></span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- dashboard-list end-->
+                                        {% endfor %}    
+                                    </div>
+                                    <!-- pagination-->
+                                    <div class="pagination">
+                                        <a href="{{current_path}}&page=1" class="prevposts-link"><i class="fa fa-angle-double-left"></i></a>
+                                        
+                                        {% if has_previous %}
+                                            <a href="{{current_path}}&page={{previous_page}}" class="prevposts-link"><i class="fa fa-angle-left"></i></a>
+                                        {% endif %}
+                                        <!-- <div class="price-opt"> -->
+                                            <span class="price-opt-title">Page:</span>
+                                            <!-- <div class="listsearch-input-item"> -->
+                                                <select id="all_listing_page" value="{{page}}" class="form-control" style="display: inline-block;width:auto;">
+                                                    {% for pg in page_range %}
+                                                        {% if pg == curr_page %}
+                                                            <option selected="selected">{{pg}}</option>
+                                                        {% else %}
+                                                            <option>{{pg}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            <!-- </div> -->
+                                        <!-- </div> -->
+                                        {% if has_next %}
+                                            <a href="{{current_path}}&page={{next_page}}" class="nextposts-link"><i class="fa fa-angle-right"></i></a>
+                                        {% endif %}
+
+                                        <a href="{{current_path}}&page={{nb_of_pages}}" class="nextposts-link"><i class="fa fa-angle-double-right"></i></a>
+                                        
+                                    </div>
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+            <!--footer -->
+            <footer class="main-footer">
+                {% include 'footer.html' %}
+            </footer>
+            <!--footer end -->           
+            <!--register form -->
+            {% include 'login-signup-logout-tags.html' %}
+            <!--register form end -->
+            <a class="to-top"><i class="fas fa-caret-up"></i></a>
+        </div>
+        <!-- Main end -->
+        <!--=============== scripts  ===============-->
+        <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/js/plugins.js"></script>
+        <script type="text/javascript" src="../static/js/scripts_new.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7eqcPUwBmkn80owGULmLmMVEZFr-iv4&libraries=places&callback=initAutocomplete"></script>        
+        <script type="text/javascript">
+
+            // pagination
+            $(function(){
+                // bind change event to select
+                $('#all_listing_page').on('change', function () {
+                    var page = $(this).val(); // get selected value
+                    var curr_url = window.location.href;
+                    if (page) { // require a URL
+                        window.location = curr_url + '&page='+page; // redirect
+                    }
+                    return false;
+                });
+            });
+
+            // Login
+            $(document).on('submit', '#loginForm', function(){
+                var username =  $("#uName").val(); 
+                var password =  $("#uPass").val();
+                $.post(
+                    '{% url 'login' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password
+                    },  
+                    // callback
+                    function(json){
+                        //sessionStorage.setItem('username', username);
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#login-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // Signup
+            $(document).on('submit', '#signupForm', function(){
+                var username =  $("#signup_uName").val(); 
+                var password =  $("#signup_uPass").val();
+                var password2 =  $("#signup_uPass2").val();
+                $.post(
+                    '{% url 'signup' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password,
+                        "password2": password2
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#signup-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // logout
+            $(document).on('click', '#logout-link', function(){
+                $.get(
+                    '{% url 'logout' %}',  
+                    // data
+                    {},  
+                    // callback
+                    function(json){
+                        $("#signin-icon").show();
+                        $("#posting-icon").hide();
+                        $("#request-icon").hide();
+                        $("#header_show_img").hide();
+                        $("#welcome").removeClass().addClass("header-user-name");
+                        $("#welcome-list").removeClass();
+                        $("a#user_protrait").text("My Account");
+                        $("a#user_protrait").attr("href", "");
+                    },
+                )
+            });
+            // search 
+            $(document).on('click', '#search-button', function(){
+                var city =  $("#search-location").val();
+                var adults_quantity =  $("#search-adults-quantity").val();
+                var rooms_quantity =  $("#search-rooms-quantity").val();
+                data = {};
+                $.get(
+                    '',  
+                    // data
+                    {
+                    },  
+                    // callback
+                    function(json){
+                        window.location.href ="../search_requests?city="+city+"&adults_quantity="+adults_quantity+"&rooms_quantity="+rooms_quantity;
+                    },
+                )
+            });
+        </script>        
+    </body>
+</html>
