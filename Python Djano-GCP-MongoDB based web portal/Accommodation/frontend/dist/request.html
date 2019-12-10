@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>AirNSW - Request</title>
+        {% include 'head.html' %}  
+    </head>
+    <body>
+        <!--loader-->
+        <div class="loader-wrap">
+            <div class="pin">
+                <div class="pulse"></div>
+            </div>
+        </div>
+        <!--loader end-->
+        <!-- Main  -->
+        <div id="main">
+            <!-- header-->
+            <header class="main-header">
+                {% include 'header.html' %}
+
+            </header>
+            <!--  header end -->
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    <section class="flat-header color-bg adm-header" style="background-color: #c0b3a0;">
+                        <div class="wave-bg wave-bg2"></div>
+                        <div class="container">
+                            <div class="dasboard-wrap fl-wrap">
+                                <!--dasboard-sidebar-->
+                                <div class="dasboard-sidebar">
+                                {% include 'sidebar.html' %}
+                                </div>
+                                <!--dasboard-sidebar end--> 
+                                <!-- dasboard-menu-->
+                                <div class="dasboard-menu">
+                                {% include 'dash_menu.html' %}
+                                </div>
+                                <!--dasboard-menu end-->
+                                <!--Tariff Plan menu-->
+                                
+                                <!--Tariff Plan menu end-->
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end-->
+                    <!-- section  -->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="box-widget-item-header">
+                                        <h3> Basic Informations</h3>
+                                    </div>
+                                    <!-- profile-edit-container--> 
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <label>Request Title <i class="fal fa-briefcase"></i></label>
+                                            <span id="request_id" style="display: none;">{{request_id}}</span>
+                                            <input id="title-of-home" type="text" placeholder="Title of your Request" value="{{request_title}}"/>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Type / Category</label>
+                                                    <div class="listsearch-input-item">
+                                                        <select id="type-of-home" data-placeholder="Apartments" class="chosen-select no-search-select" >
+                                                            <option></option>
+                                                            {% if request_type == 'Apartments' %}
+                                                            <option selected = "selected">Apartments</option>
+                                                            {% else %}
+                                                            <option>Apartments</option>
+                                                            {% endif %}
+
+                                                            {% if request_type == 'Hotel' %}
+                                                            <option selected = "selected">Hotel</option>
+                                                            {% else %}
+                                                            <option>Hotel</option>
+                                                            {% endif %}
+
+                                                            {% if request_type == 'House' %}
+                                                            <option selected = "selected">House</option>
+                                                            {% else %}
+                                                            <option>House</option>
+                                                            {% endif %}
+
+                                                            {% if request_type == 'Loft' %}
+                                                            <option selected = "selected">Loft</option>
+                                                            {% else %}
+                                                            <option>Loft</option>
+                                                            {% endif %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-md-6" >
+                                                    <label>City / Location</label>
+                                                    <div class="listsearch-input-item">
+                                                        <select id="city-of-home" data-placeholder="City" class="chosen-select no-search-select" >
+                                                            <option></option>
+                                                            {% if city == 'Sydney' %}
+                                                            <option selected = "selected">Sydney</option>
+                                                            {% else %}
+                                                            <option>Sydney</option>
+                                                            {% endif %}
+
+                                                            {% if city == 'Newcastle' %}
+                                                            <option selected = "selected">Newcastle</option>
+                                                            {% else %}
+                                                            <option>Newcastle</option>
+                                                            {% endif %}
+                                                            
+                                                            {% if city == 'Wollongong' %}
+                                                            <option selected = "selected">Wollongong</option>
+                                                            {% else %}
+                                                            <option>Wollongong</option>
+                                                            {% endif %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                    <!-- profile-edit-container end-->
+                                    <div class="box-widget-item-header mat-top">
+                                        <h3>Details</h3>
+                                    </div>
+                                    <!-- profile-edit-container-->
+                                    <div class="profile-edit-container">
+                                    <div class="custom-form">
+                                        <label>Bedrooms Number<i class="far fa-home"></i>  </label>
+                                        <input id="bedroom-number-of-home" type="text" placeholder="" value="{{bedrooms_num}}"/>
+                                        <label>Bathrooms Number<i class="far fa-home"></i>  </label>
+                                        <input id="bathroom-number-of-home" type="text" placeholder="" value="{{bathrooms_num}}"/>
+                                        <label>Beds Number<i class="far fa-bed"></i>  </label>
+                                        <input id="bed-number-of-home" type="text" placeholder="" value="{{beds_num}}"/>
+                                        <label>Geusts Number<i class="far fa-bed"></i>  </label>
+                                        <input id="geust-number-of-home" type="text" placeholder="" value="{{geust_num}}"/>
+                                    </div>
+                                    </div>
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <label>Description</label>
+                                            <textarea id="description-of-home" cols="40" rows="3" placeholder="Description">{{description}}</textarea> 
+                                        </div>
+                                    </div>
+                                    <!-- profile-edit-container end-->                                       
+                                    <!-- profile-edit-container end-->                                        
+                                    <div class="box-widget-item-header mat-top">
+                                        <h3>Facilities</h3>
+                                    </div>
+                                    <!-- profile-edit-container--> 
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <!-- Checkboxes -->
+                                            <ul class="fl-wrap filter-tags">
+                                                <li>
+                                                    {% if wifi %}
+                                                    <input id="check-wifi" type="checkbox" name="check" checked>
+                                                    {% else %}
+                                                    <input id="check-wifi" type="checkbox" name="check">
+                                                    {% endif %}
+                                                    <label for="check-wifi">Free WiFi</label>
+                                                </li>
+                                                <li>
+                                                    {% if parking %}
+                                                    <input id="check-parking" type="checkbox" name="check" checked>
+                                                    {% else %}
+                                                    <input id="check-parking" type="checkbox" name="check">
+                                                    {% endif %}
+                                                    <label for="check-parking">Parking</label>
+                                                </li>
+                                                <li>   
+                                                    {% if fitness %}
+                                                    <input id="check-fitness" type="checkbox" name="check" checked>
+                                                    {% else %}
+                                                    <input id="check-fitness" type="checkbox" name="check">
+                                                    {% endif %}                                    
+                                                    <label for="check-fitness">Fitness</label>
+                                                </li>
+                                                <li>
+                                                    {% if washing_machine %}
+                                                    <input id="check-washing-machine" type="checkbox" name="check" checked>
+                                                    {% else %}
+                                                    <input id="check-washing-machine" type="checkbox" name="check">
+                                                    {% endif %}              
+                                                    <label for="check-washing-machine">Washing Machine</label>
+                                                </li>
+                                                <li>      
+                                                    {% if air_conditioning %}
+                                                    <input id="check-air-Conditioning" type="checkbox" name="check" checked>
+                                                    {% else %}
+                                                    <input id="check-air-Conditioning" type="checkbox" name="check">
+                                                    {% endif %}                                      
+                                                    <label for="check-air-Conditioning">Air Conditioning</label>
+                                                </li>
+                                                <li>    
+                                                    {% if tv %}
+                                                    <input id="check-tv" type="checkbox" name="check" checked>
+                                                    {% else %}
+                                                    <input id="check-tv" type="checkbox" name="check">
+                                                    {% endif %}                                        
+                                                    <label for="check-tv">TV</label>
+                                                </li>
+                                            </ul>
+                                            <!-- Checkboxes end -->
+                                        </div>
+                                    </div>
+                                    <!-- profile-edit-container end-->
+                                    <div class="profile-edit-container">
+                                        <div class="custom-form">
+                                            <button class="btn color2-bg float-btn" id="posting-button">Post</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+            <!--footer -->
+            <footer class="main-footer">
+                {% include 'footer.html' %}
+            </footer>
+            <!--footer end -->          
+            <!--register form -->
+            {% include 'login-signup-logout-tags.html' %}
+            <!--register form end -->
+            <a class="to-top"><i class="fas fa-caret-up"></i></a>
+        </div>
+        <!-- Main end -->
+        <!--=============== scripts  ===============-->
+        <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/js/plugins.js"></script>
+        <script type="text/javascript" src="../static/js/scripts_new.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7eqcPUwBmkn80owGULmLmMVEZFr-iv4&libraries=places&callback=initAutocomplete"></script>
+        <script type="text/javascript" src="../static/js/map-add.js"></script>
+        <script type="text/javascript">
+            $( window ).load(function() {
+                $('#dash_profile').removeClass("user-profile-act");
+                $('#dash_listing').removeClass("user-profile-act");
+                $('#dash_review').removeClass("user-profile-act");
+                $('#dash_booking').removeClass("user-profile-act");
+                $('#dash_request').addClass("user-profile-act");
+            });
+
+            $(document).on('click', '#posting-button', function(){
+                //alert('post');
+                if(document.getElementById('request_id') != null){
+                    var request_id = document.getElementById('request_id').innerHTML;
+                    //alert(request_id);
+                } else {
+                    var request_id = '';
+                }
+                var title =  $("#title-of-home").val(); 
+                if(title === ""){
+                    alert('Title can not be empty.');
+                    return false;
+                }
+                var type =  $("#type-of-home").val();
+                if(type === ""){
+                    alert('Please choose the type.');
+                    return false;
+                }
+                var city =  $("#city-of-home").val();
+                if(city === ""){
+                    alert('Please choose the city.');
+                    return false;
+                }
+                var description =  $("#description-of-home").val();
+                var bedroom =  $("#bedroom-number-of-home").val();
+                var bed =  $("#bed-number-of-home").val();
+                var geust =  $("#geust-number-of-home").val();
+                var bathroom =  $("#bathroom-number-of-home").val();
+                // amenity
+                var isWifiChecked = $('#check-wifi').prop('checked');
+                var isParkingChecked = $('#check-parking').prop('checked');
+                var isFitnessChecked = $('#check-fitness').prop('checked');
+                var isWashingMachineChecked = $('#check-washing-machine').prop('checked');
+                var isAirConditioningChecked = $('#check-air-Conditioning').prop('checked');
+                var isHairDryerChecked = $('#check-hair-Dryer').prop('checked');
+                var isTvChecked = $('#check-tv').prop('checked');
+                // share space
+                $.post(
+                    '{% url 'request' %}',  
+                    // data
+                    {
+                        "request_id": request_id,
+                        "title": title,
+                        "type": type,
+                        "city": city,
+                        "description": description,
+                        "bedroom": bedroom,
+                        "bed": bed,
+                        "geust": geust,
+                        "bathroom": bathroom,
+                        "wifi": isWifiChecked,
+                        "parking": isParkingChecked,
+                        "fitness": isFitnessChecked,
+                        "washing_machine": isWashingMachineChecked,
+                        "air_conditioning": isAirConditioningChecked,
+                        "hair_dryer": isHairDryerChecked,
+                        "tv": isTvChecked,
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            //alert('succeed');
+                            console.log("post succeed");
+                            window.location.href ="../user_requests";
+                        } else {
+                            alert('You have not written anything.');
+                            console.log("post failed");
+                        }
+                    },
+                )
+                return false;
+            });
+            // Login
+            $(document).on('submit', '#loginForm', function(){
+                var username =  $("#uName").val(); 
+                var password =  $("#uPass").val();
+                $.post(
+                    '{% url 'login' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#login-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // Signup
+            $(document).on('submit', '#signupForm', function(){
+                var username =  $("#signup_uName").val(); // 获取输入框的值
+                var password =  $("#signup_uPass").val();
+                var password2 =  $("#signup_uPass2").val();
+                $.post(
+                    '{% url 'signup' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password,
+                        "password2": password2
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#signup-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // logout
+            $(document).on('click', '#logout-link', function(){
+                $.get(
+                    '{% url 'logout' %}',  
+                    // data
+                    {},  
+                    // callback
+                    function(json){
+                        window.location.href ="../";
+                    },
+                )
+            });
+        </script>   
+    </body>
+</html>
+
+

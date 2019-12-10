@@ -1,0 +1,59 @@
+<!-- header-top-->
+<div class="header-top fl-wrap">
+        <div class="container">
+            <div class="logo-holder">
+                <a href="../"><img src="../static/images/airnsw.png" alt="" style="width:120px;height:40px; margin-left: 5px;"></a>
+            </div>
+            {% if request.session.username %} 
+            <a href="../user_requests" class="add-hotel" id="request-icon" style="display:block;">Make Your Requests <span><i class="far fa-plus"></i></span></a> 
+            <a href="../user_listings" class="add-hotel" id="posting-icon" style="display:block; ">Become A Host <span><i class="far fa-plus"></i></span></a> 
+            {% else %}
+            <a href="../user_requests" class="add-hotel" id="request-icon" style="display:none; ">Make Your Requests <span><i class="far fa-plus"></i></span></a> 
+            <a href="../user_listings" class="add-hotel" id="posting-icon" style="display:none; ">Become A Host <span><i class="far fa-plus"></i></span></a> 
+            {% endif %}
+            <a href="../request_listings" class="add-hotel">Find Requests <span><i class="far fa-plus"></i></span></a> 
+            {% if request.session.username %} 
+            <div class="show-reg-form modal-open" id="signin-icon" style="display:none"><i class="fa fa-sign-in"></i>Sign In</div>
+            {% else %}                   
+            <div class="show-reg-form modal-open" id="signin-icon" style="display:block"><i class="fa fa-sign-in"></i>Sign In</div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- header-top end-->
+    <!-- header-inner-->
+    <div class="header-inner fl-wrap">
+        <div class="container">
+            <!-- my account -->
+            <div class="header-user-menu" id="my-account">
+                <div class="header-user-name" id="welcome">
+                    
+                    {% if request.session.username %} 
+                        <span><img id="header_show_img" src="{{ show_img }}" alt=""></span>
+                        <a id="user_protrait" href="../user_profile?account_username={{request.session.username}}" style="color: white;">{{ request.session.username }}</a>
+                    {% else %}
+                        <span><img id="header_show_img" src="" alt=""></span>
+                        <a id="user_protrait" href="" style="color: white;">My Account</a>
+                    {% endif %}
+                </div>
+                <ul id="welcome-list">
+                    <li><a href="../edit_profile"> Edit profile </a ></li>
+                    <li><a id="logout-link">Log Out</a></li>
+                </ul>
+            </div>
+            <div class="home-btn"><a href="../"><i class="fas fa-home"></i></a></div>
+            <!-- nav-button-wrap-->
+            <div class="nav-button-wrap color-bg">
+                <div class="nav-button">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+                       
+            {% if request.session.username %} 
+                <span id="get_username" style="display: none;">{{ request.session.username }}</span>
+            {% else %}
+                <span id="get_username" style="display: none;">need_login</span>
+            {% endif %}
+            <!-- wishlist-wrap end--> 
+        </div>
+    </div>
+    <!-- header-inner end-->

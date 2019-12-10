@@ -1,0 +1,376 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>AirNSW - Booking</title>
+        {% include 'head.html' %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        <!--loader-->
+        <div class="loader-wrap">
+            <div class="pin">
+                <div class="pulse"></div>
+            </div>
+        </div>
+        <!--loader end-->
+        <!-- Main  -->
+        <div id="main">
+             <!-- header-->
+             <header class="main-header">
+                {% include 'header.html' %}
+             </header>
+             <!--  header end -->
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- content-->
+                <div class="content">
+                    <!-- section-->
+                    <section class="flat-header color-bg adm-header" style="background-color: #c0b3a0;">
+                        <div class="wave-bg wave-bg2"></div>
+                        <div class="container">
+                            <div class="dasboard-wrap fl-wrap">
+                                <!--dasboard-sidebar-->
+                                <div class="dasboard-sidebar">
+                                    {% include 'sidebar.html' %}
+                                </div>
+                                <!--dasboard-sidebar end--> 
+                                <!-- dasboard-menu-->
+                                <div class="dasboard-menu">
+                                    {% include 'dash_menu.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end-->
+                    <!-- section-->
+                    <section class="middle-padding">
+                        <div class="container">
+                            <!--dasboard-wrap-->
+                            <div class="dasboard-wrap fl-wrap">
+                                <!-- dashboard-content--> 
+                                <div class="dashboard-content fl-wrap">
+                                    <div class="dashboard-list-box fl-wrap">
+                                        <div class="dashboard-header fl-wrap">
+                                            <h3>Bookings</h3>
+                                        </div>
+                                        <!-- dashboard-list end-->
+                                        {% for order in orders %}
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                {% if order.tag == 'host' %}
+                                                <form action="{% url 'reservation' order.acc_id %}" method="post" name="host_orders">
+                                                    <span class="new-dashboard-item">{{ order.tag }}</span>
+                                                    <div class="dashboard-message-avatar">
+                                                        <img src="../static/images/avatar/1.jpg" alt="">
+                                                    </div>
+                                                    <div class="dashboard-message-text" id="order_item">
+                                                        <h4>{{ order.name }} - 
+                                                            <span>{{ order.order_time }}</span>
+                                                            <span name="count_down" id="count_down_{{order.order_id}}_{{ order.deadline }}"></span></h4>
+                                                        <div class="booking-details fl-wrap">
+                                                            <span class="booking-title">Order Number :</span>
+                                                            <span class="booking-text"><a>{{ order.order_id }}</a></span>
+                                                        </div>
+                                                        <div class="booking-details fl-wrap">
+                                                            <span class="booking-title">Listing Item :</span>
+                                                            <span class="booking-text"><a href="../listing_single/?acc_id={{ order.acc_id }}">{{ order.acc_title }}</a></span>
+                                                        </div>
+                                                        <div class="booking-details fl-wrap">
+                                                            <span class="booking-title">Persons :</span>   
+                                                            <span class="booking-text">{{ order.guests_num }} Peoples</span>
+                                                        </div>
+                                                        <div class="booking-details fl-wrap" name="dates_checkin_out">
+                                                            <span class="booking-title">Booking Date :</span>   
+                                                            <span class="booking-text">{{ order.check_in }}  - {{ order.check_out }}</span>
+                                                        </div>
+                                                        <div class="booking-details fl-wrap">                                                               
+                                                            <span class="booking-title">Mail :</span>  
+                                                            <span class="booking-text"><a href="#" target="_top">{{ order.email }}</a></span>
+                                                        </div>
+                                                        <div class="booking-details fl-wrap" name="dates_count">                                                               
+                                                            <span class="booking-title">Total Price :</span>  
+                                                            <span class="booking-text"><a href="#" target="_top">$ {{ order.total_price }}</a></span>
+                                                        </div>
+                                                        <div class="booking-details fl-wrap">
+                                                            <span class="booking-title">Payment State :</span>
+                                                            <span class="booking-text"> <strong class="done-paid">{{ order.status }}  </strong>  {{ order.card_num }}</span>
+                                                        </div>
+                                                        <span class="fw-separator">
+                                                            <input type="number" name="order_id" class="hid-input" value="{{ order.order_id }}">
+                                                            {% if order.status == 'not paid yet' %}
+                                                            <button type='submit' class="cs-mumber-button color2-bg" id="book_now">Go to pay now</button>
+                                                            <a class="cs-mumber-button color2-bg" onclick=cancel_order({{ order.order_id }})>Cancel</a>
+                                                            {% elif order.status == 'paid' %}
+                                                            <a class="cs-mumber-button color2-bg" onclick=refund_order({{ order.order_id }})>Refund</a>
+                                                            <a class="cs-mumber-button color2-bg" href="../listing_single?acc_id={{ order.acc_id }}#sec6">Add review</a>
+                                                            {% endif %}
+                                                            {% if order.status == 'finished' %}
+                                                            <a class="cs-mumber-button color2-bg" href="../listing_single?acc_id={{ order.acc_id }}#sec6">Add review</a>
+                                                            {% endif %}
+                                                        </span>
+                                                    </div>
+                                                </form> 
+                                                {% else %}
+                                                <span class="new-dashboard-item">{{ order.tag }}</span>
+                                                <div class="dashboard-message-avatar">
+                                                    <img src="../static/images/avatar/1.jpg" alt="">
+                                                </div>
+                                                <div class="dashboard-message-text">
+                                                    <h4>{{ order.name }} - <span>{{ order.order_time }}</span></h4>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Order Number :</span>
+                                                        <span class="booking-text"><a>{{ order.order_id }}</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Listing Item :</span>
+                                                        <span class="booking-text"><a href="../listing_single/?acc_id={{ order.acc_id }}">{{ order.acc_title }}</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Persons :</span>   
+                                                        <span class="booking-text">{{ order.guests_num }} Peoples</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Booking Date :</span>   
+                                                        <span class="booking-text">{{ order.check_in }}  - {{ order.check_out }}</span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">                                                               
+                                                        <span class="booking-title">Mail :</span>  
+                                                        <span class="booking-text"><a href="#" target="_top">{{ order.email }}</a></span>
+                                                    </div>
+                                                    <div class="booking-details fl-wrap">
+                                                        <span class="booking-title">Payment State :</span>
+                                                        {% if order.status == 'not paid yet' %}
+                                                            <span class="booking-text"> <strong class="done-paid">Waitting for user to pay </strong></span>
+                                                        {% elif order.status == 'paid' or order.status == 'finished' %}
+                                                            <span class="booking-text"> <strong class="done-paid">Booked succeed </strong></span>
+                                                        {% else %}
+                                                            <span class="booking-text"> <strong class="done-paid">Canceled </strong></span>
+                                                        {% endif %} 
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% endfor %}                                         
+                                    </div>
+                                    <!-- pagination-->
+                                    <div class="pagination">
+                                        <a href="../booking_history?page=1" class="prevposts-link"><i class="fa fa-angle-double-left"></i></a>
+                                        {% if has_previous %}
+                                            <a href="../booking_history?page={{previous_page}}" class="prevposts-link"><i class="fa fa-angle-left"></i></a>
+                                        {% endif %}
+                                        <!-- <div class="price-opt"> -->
+                                            <span class="price-opt-title">Page:</span>
+                                            <!-- <div class="listsearch-input-item"> -->
+                                                <select id="all_listing_page" value="{{page}}" class="form-control" style="display: inline-block;width:auto;">
+                                                    {% for pg in page_range %}
+                                                        {% if pg == curr_page %}
+                                                            <option selected="selected">{{pg}}</option>
+                                                        {% else %}
+                                                            <option>{{pg}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            <!-- </div> -->
+                                        <!-- </div> -->
+                                        {% if has_next %}
+                                            <a href="../booking_history?page={{next_page}}" class="nextposts-link"><i class="fa fa-angle-right"></i></a>
+                                        {% endif %}
+                                        <a href="../booking_history?page={{nb_of_pages}}" class="nextposts-link"><i class="fa fa-angle-double-right"></i></a>
+                                        
+                                    </div>
+                                </div>
+                                <!-- dashboard-list-box end--> 
+                            </div>
+                            <!-- dasboard-wrap end-->
+                        </div>
+                    </section>
+                    <div class="limit-box fl-wrap"></div>
+                </div>
+                <!-- content end-->
+            </div>
+            <!--wrapper end -->
+            <!--footer -->
+            <footer class="main-footer">
+                {% include 'footer.html' %}
+            </footer>
+            <!--footer end -->           
+            <!--register form -->
+            {% include 'login-signup-logout-tags.html' %}
+            <!--register form end -->
+            <a class="to-top"><i class="fas fa-caret-up"></i></a>
+        </div>
+        <!-- Main end -->
+        <!--=============== scripts  ===============-->
+        <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/js/plugins.js"></script>
+        <script type="text/javascript" src="../static/js/scripts_new.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL7eqcPUwBmkn80owGULmLmMVEZFr-iv4&libraries=places&callback=initAutocomplete"></script>
+        <!--=============== our scripts  ===============-->
+        <script type="text/javascript">
+            $( window ).load(function() {
+                $('#dash_request').removeClass("user-profile-act");
+                $('#dash_profile').removeClass("user-profile-act");
+                $('#dash_review').removeClass("user-profile-act");
+                $('#dash_listing').removeClass("user-profile-act");
+                $('#dash_booking').addClass("user-profile-act");
+            });
+
+            // pagination
+            $(function(){
+                // bind change event to select
+                $('#all_listing_page').on('change', function () {
+                    var page = $(this).val(); // get selected value
+                    if (page) { // require a URL
+                        window.location = '../booking_history?page='+page; // redirect
+                    }
+                    return false;
+                });
+            });
+            // Login
+            $(document).on('submit', '#loginForm', function(){
+                var username =  $("#uName").val(); 
+                var password =  $("#uPass").val();
+                $.post(
+                    '{% url 'login' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#login-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // Signup
+            $(document).on('submit', '#signupForm', function(){
+                var username =  $("#signup_uName").val(); 
+                var password =  $("#signup_uPass").val();
+                var password2 =  $("#signup_uPass2").val();
+                $.post(
+                    '{% url 'signup' %}',  
+                    // data
+                    {
+                        "username": username,
+                        "password": password,
+                        "password2": password2
+                    },  
+                    // callback
+                    function(json){
+                        var status = json['status'];
+                        if(status === "succeed"){
+                            $("#posting-icon").show();
+                            $("#request-icon").show();
+                            $("a#user_protrait").text(username);
+                            $("a#user_protrait").attr("href", "../user_profile?account_username="+json['username']);
+                            $("#header_show_img").attr("src", json['show_img']);
+                            $("#header_show_img").show();
+                            $("#regist-box").hide();
+                            $("#signin-icon").hide();
+                        }else{
+                            var msg = json['msg'];
+                            $("#my-account").hide();
+                            $("#signup-message").text(msg);
+                        }
+                    },
+                )
+                return false;
+            });
+            // logout
+            $(document).on('click', '#logout-link', function(){
+                $.get(
+                    '{% url 'logout' %}',  
+                    // data
+                    {},  
+                    // callback
+                    function(json){
+                        $("#signin-icon").show();
+                        $("#posting-icon").hide();
+                        $("#request-icon").hide();
+                        $("#header_show_img").hide();
+                        $("#welcome").removeClass().addClass("header-user-name");
+                        $("#welcome-list").removeClass();
+                        $("a#user_protrait").text("My Account");
+                        $("a#user_protrait").attr("href", "");
+                    },
+                )
+            });
+            // cancel order
+            function cancel_order(order_id){
+                $.post(
+                    '{% url 'cancel_order' %}',
+                    {
+                        'order_id':order_id
+                    },
+                    function(json){
+                        console.log(json['status']);
+                        window.location.href ="../booking_history";
+                    }
+                )
+            };
+            // refund order
+            function refund_order(order_id){
+                $.post(
+                    '{% url 'refund_order' %}',
+                    {
+                        'order_id':order_id
+                    },
+                    function(json){
+                        console.log(json['status']);
+                        window.location.href ="../booking_history";
+                    }
+                )
+            };
+            // order time count down
+            function formatType(n){
+                return n >= 0 && n < 10 ? '0' + n : '' + n;
+            }
+            var host_list = document.getElementsByName("host_orders");
+            clock();
+            function clock(){
+                host_list.forEach(element => {
+                    var paid_tag = element.children[2].children[7].children[1].children[0].innerHTML;
+                    var count_down = element.children[2].children[0].children[1];
+                    var not_paid = "not paid yet  ";
+                    if (paid_tag == not_paid){
+                        var deadline = new Date(parseFloat(count_down.id.split("_")[3]));
+                        var now = new Date();
+                        var oldTime = now.getTime();
+                        var newTime = deadline.getTime();
+                        var second = Math.floor((newTime - oldTime) / 1000);
+                        var remainSecond = second;
+                        var minute = Math.floor(second / 60);
+                        second %= 60;
+                        var str_count_down = formatType(minute) + ':' + formatType(second);
+                        if(remainSecond >0){
+                            count_down.innerHTML = "  remain " + str_count_down + " to pay";
+                        } else {
+                            element.children[2].children[7].children[1].children[0].innerHTML = "canceled";
+                            element.children[2].children[8].children[1].style.display ="none";
+                            element.children[2].children[8].children[2].style.display ="none";
+                        }
+                    }
+                });
+                
+                setTimeout(clock,500);
+            }
+        </script>         
+    </body>
+</html>
