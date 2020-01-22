@@ -12,3 +12,6 @@
 - Accommodation Web Portal
   - Data crawling, cleaning
   - Python Django + GCP + MongoDB + SQLite
+- Javascript-Instacram
+  - Single page application - Instagram
+  - Node.js(frontend) + python(backend)
