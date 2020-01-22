@@ -1,0 +1,342 @@
+
+/* base styles, feel free to edit */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    height: 100%;
+    font-family: -apple-system, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow: auto;
+}
+
+.banner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color:white;
+    min-height: 60px;
+    border-bottom: 1px solid rgba(0,0,0,.0975);
+}
+
+footer {
+    border-top: 1px solid rgba(0,0,0,.0975);
+    padding: 10px;
+    background-color:white;
+    min-height: 60px;
+    text-align: right;
+}
+
+.banner > *, footer > * {
+    margin: 10px 25px;
+}
+
+.nav {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-item {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: auto;
+    padding: 5px;
+    display: inline;
+    list-style-type: none;
+}
+
+.post {
+    max-width: 640px;
+    overflow: hidden;
+    margin: 30px auto;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,.0975);
+
+    padding:10px;
+    -moz-box-shadow:3px 3px 4px #000;
+    -webkit-box-shadow:3px 3px 4px #000;
+    box-shadow:3px 3px 4px #000;
+    filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135,Color='#000000')
+}
+
+.post-title {
+    padding: 20px 40px;
+    margin: 0;
+    border-bottom: 1px solid rgba(0,0,0,.0975);
+}
+
+.post-img {
+    padding-bottom: 15px;
+}
+
+.post-thumb {
+    margin: 0;
+    padding: 3px;
+    width: 150px;
+    height: 150px;
+    border: 2px solid snow;
+}
+
+.post-image {
+    width: 640px;
+    height: 640px;
+}
+
+@media screen and (max-width: 500px) {
+    .post {
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,.0975);
+        border-top: 1px solid rgba(0,0,0,.0975); 
+        max-height: 60vh;
+    }
+
+    .post-image {
+        max-width: 100%;
+        max-height: 60vh;
+    }
+
+    #feed > * {
+        flex: 1 1 45%;
+        height: auto;
+    }
+}
+
+/* Add your styles here */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    padding-top: 10px; /* Location of the box */
+    padding-left: 10px; /* Location of the box */
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 5%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: white; /* Fallback color */
+
+    -moz-box-shadow:3px 3px 4px rgb(250, 248, 248);
+    -webkit-box-shadow:3px 3px 4px rgb(243, 237, 237);
+    box-shadow:3px 3px 4px rgb(18, 15, 19);
+    filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135,Color='#000000')
+
+}
+
+
+p {
+    padding-left: 25px;
+    padding-right: 20px;
+    font-size:19px;
+    font-family: Helvetica;
+    width: 100%;
+}
+
+b {
+    font-size:19px;
+    width: 30%;
+}
+
+span {
+    padding-left: 500px;
+    font-size:20px;
+}
+
+li {
+    font-size:18px;
+}
+
+.post-title {
+    padding-left: 25px;
+}
+
+.addDiv {
+    padding-left: 250px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: flex; /* Stay in place */
+    
+    width: 50%; /* Full width */
+    height: 60%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: white; /* Black w/ opacity */
+    padding-bottom: 10px;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    height: 100%;
+    width: 97%;
+    padding-bottom: 100px
+}
+
+.title {
+    color: black;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    margin-top: 2px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The Close Button */
+.update {
+    color: #aaaaaa;
+    float: right;
+    padding-right: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.update:hover,
+.update:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-left: 25px;
+    display: inline;
+    list-style-type: none;
+}
+
+
+
+.post-unfollow {
+    color: #5e1ff0e9;
+    float: right;
+    margin-top: 2px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.post-unfollow:hover,
+.post-unfollow:focus {
+    color: rgba(0, 0, 0, 0.235);
+    text-decoration: none;
+    cursor: pointer;
+}
+.post-comment {
+    color: #5e1ff0e9;
+    float: right;
+    margin-top: 2px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.post-comment:hover,
+.post-comment:focus {
+    color: rgba(0, 0, 0, 0.235);
+    text-decoration: none;
+    cursor: pointer;
+}
+.post-like {
+    color: #5e1ff0e9;
+    float: right;
+    margin-top: 2px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.post-like:hover,
+.post-like:focus {
+    color: rgba(0, 0, 0, 0.235);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.f_c_l_pEl {
+    float: left; 
+    font-size: 19px;
+    font-family: Helvetica;
+    margin-bottom: 38px;
+}
+
+.post-likes {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Helvetica;
+}
+.post-likes:hover,
+.post-likes:focus {
+    color: rgba(24, 23, 23, 0.632);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.post-comments {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Helvetica;
+}
+.post-comments:hover,
+.post-comments:focus {
+    color: rgba(24, 23, 23, 0.632);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.post-description {
+    color: black;
+    font-size: 19px;
+    font-family: Helvetica;
+}
+
+.post-img {
+    width: 100%;
+    height: 80%;
+}
+
+.post-delete {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Helvetica;
+    float: right;
+    margin-bottom: 15px;
+}
+.post-delete:hover,
+.post-delete:focus {
+    color: rgba(24, 23, 23, 0.632);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.post-update {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Helvetica;
+    float: right;
+    margin-bottom: 12px;
+}
+.post-update:hover,
+.post-update:focus {
+    color: rgba(24, 23, 23, 0.632);
+    text-decoration: none;
+    cursor: pointer;
+}

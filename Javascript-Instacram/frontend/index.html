@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Instacram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- You can add your styles and scripts here -->
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/provided.css" />
+    <script type="module" src="src/helpers.js"></script>
+    <script type="module" src="src/api.js"></script>
+</head>
+<!-- background-image: url('back.jpg')-->
+<body style="background-image: url('back7.jpg');background-size: cover;position: relative;">
+    <!-- This is an example app structure --> 
+    <header class='banner' style='position: fixed;top: 0;width: 100%'>
+        <h1 id='ins'>Instacram</h1>
+        <ul class='nav'>
+            <li class='nav-item' id='followSearch'>Follow</li>
+            <li class='nav-item' id='mypage'>My Page</li>
+            <li class='nav-item' id='profile'>Profile</li>
+            <li class="nav-item"><input type="file"/></li>
+            <li class='nav-item' id='signUp'>Sign Up</li>
+            <li class='nav-item' id='login'>Login</li>
+            <li class='nav-item' id='logout'>Logout</li>
+        </ul>
+    </header>
+    <main role='main' style="padding: 120px">
+        <!-- app goes here --> 
+        <div class='addDiv' id='followDiv' style="display:none">
+            <input class='nav-item' type="text" id='follow' placeholder="Enter UserName">
+            <button class='nav-item' id='followBtn'>Follow</button>
+        </div>
+        
+        <div class='addDiv' id='loginDiv' style="display:none">
+            <input class='nav-item' type="text" id='username' placeholder="Enter User Name">
+            <input class='nav-item' type="password" id='userpass' placeholder="Enter Password">
+            <button class='nav-item' id='loginBtn'>Login</button>
+        </div>
+        <div class='addDiv' id='signUpDiv' style="display:none">
+            <input class='nav-item' type="text" id='Susername' placeholder="Enter User Name">
+            <input class='nav-item' type="password" id='Suserpass' placeholder="Enter Password">
+            <input class='nav-item' type="text" id='email' placeholder="Enter User Email">
+            <input class='nav-item' type="text" id='name' placeholder="Enter Your Name">
+            <button class='nav-item' id='signUpBtn'>Sign Up</button>
+        </div>
+        <div id='large-feed'>
+            <!-- inject feed data -->
+        </div>
+    </main>
+    <footer style='display:none;position: fixed;bottom: 0;width: 100%'>
+        <p>Instacram example</p>
+    </footer>
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
